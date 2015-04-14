@@ -172,6 +172,8 @@ img:hover{
 
 .highlight code{
 	color:#D0D0D0;
+	font-size:15px;
+	font-style:italic;
 }
 .H1_Date{
 	font-size:15px;

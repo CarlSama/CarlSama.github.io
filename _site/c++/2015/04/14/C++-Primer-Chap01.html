@@ -57,11 +57,11 @@
   <div class="span8">
     <h2>Function Defination</h2>
 
-<div class="highlight"><pre><code class="language-c--" data-lang="c++">return_type function_name(parameter_list) left_curly_brace
+<div class="highlight"><pre><code class="language-c--" data-lang="c++"><span class="n">return_type</span> <span class="n">function_name</span><span class="p">(</span><span class="n">parameter_list</span><span class="p">)</span> <span class="n">left_curly_brace</span>
 
-        function body -&gt; block scope
+        <span class="n">function</span> <span class="n">body</span> <span class="o">-&gt;</span> <span class="n">block</span> <span class="n">scope</span>
 
-    right_curly_brace</code></pre></div>
+    <span class="n">right_curly_brace</span></code></pre></div>
 
 
 <h2>Type</h2>
@@ -105,14 +105,14 @@
 
 <p><a href="https://github.com/ThreeCobblers/Paladin/blob/master/blog/C%2B%2B/chap1.md">Here is an smart example</a></p>
 
-<div class="highlight"><pre><code class="language-c--" data-lang="c++">int main(){
-    cout&lt;&lt;2;
-    clog&lt;&lt;&quot;clog&quot;;//Seems clog is un-bufferd ?
-    cout&lt;&lt;1;
-    cerr&lt;&lt;&quot;cerror&quot;;//Now std-cout-stream would be refresh ! when using endl here, clog wouldn&#39;t be printed
-    clog&lt;&lt;&quot;clog&quot;;
-    return 0;
-}</code></pre></div>
+<div class="highlight"><pre><code class="language-c--" data-lang="c++"><span class="kt">int</span> <span class="nf">main</span><span class="p">(){</span>
+    <span class="n">cout</span><span class="o">&lt;&lt;</span><span class="mi">2</span><span class="p">;</span>
+    <span class="n">clog</span><span class="o">&lt;&lt;</span><span class="s">&quot;clog&quot;</span><span class="p">;</span><span class="c1">//Seems clog is un-bufferd ?</span>
+    <span class="n">cout</span><span class="o">&lt;&lt;</span><span class="mi">1</span><span class="p">;</span>
+    <span class="n">cerr</span><span class="o">&lt;&lt;</span><span class="s">&quot;cerror&quot;</span><span class="p">;</span><span class="c1">//Now std-cout-stream would be refresh ! when using endl here, clog wouldn&#39;t be printed</span>
+    <span class="n">clog</span><span class="o">&lt;&lt;</span><span class="s">&quot;clog&quot;</span><span class="p">;</span>
+    <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span></code></pre></div>
 
 
 <p>&lt;&lt; operator 接受两个运算对象:左侧运算对象是一个ostream对象,右侧的运算对象时要打印的值.返回左侧的运算对象(可以连用 &lt;&lt;).</p>

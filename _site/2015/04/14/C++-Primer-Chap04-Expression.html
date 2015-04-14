@@ -103,10 +103,10 @@ dynamic_cast结果为0</p></blockquote></li>
 去除const和volatile属性.type-id要为指针，引用．
 可以去除底层const</p>
 
-<div class="highlight"><pre><code class="language-c--" data-lang="c++">int j = 10;
-const int * ptr = &amp;j;
-(*(const_cast&lt;int*&gt;(i))) = 0;
-cout&lt;&lt;j&lt;&lt;endl; // 0</code></pre></div>
+<div class="highlight"><pre><code class="language-c--" data-lang="c++"><span class="kt">int</span> <span class="n">j</span> <span class="o">=</span> <span class="mi">10</span><span class="p">;</span>
+<span class="k">const</span> <span class="kt">int</span> <span class="o">*</span> <span class="n">ptr</span> <span class="o">=</span> <span class="o">&amp;</span><span class="n">j</span><span class="p">;</span>
+<span class="p">(</span><span class="o">*</span><span class="p">(</span><span class="k">const_cast</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">*&gt;</span><span class="p">(</span><span class="n">i</span><span class="p">)))</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+<span class="n">cout</span><span class="o">&lt;&lt;</span><span class="n">j</span><span class="o">&lt;&lt;</span><span class="n">endl</span><span class="p">;</span> <span class="c1">// 0</span></code></pre></div>
 
 
 
