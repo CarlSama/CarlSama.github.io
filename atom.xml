@@ -1,28 +1,1076 @@
----
-layout: nil
-title : Atom Feed
----
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
  
- <title>{{ site.title }}</title>
- <link href="{{ site.production_url }}/atom.xml" rel="self"/>
- <link href="{{ site.production_url }}"/>
- <updated>{{ site.time | date_to_xmlschema }}</updated>
- <id>{{ site.production_url }}</id>
+ <title>Clint Wu's Blog</title>
+ <link href="http://carlsama.github.io/atom.xml" rel="self"/>
+ <link href="http://carlsama.github.io"/>
+ <updated>2015-04-14T14:09:07+08:00</updated>
+ <id>http://carlsama.github.io</id>
  <author>
-   <name>{{ site.author.name }}</name>
-   <email>{{ site.author.email }}</email>
+   <name></name>
+   <email></email>
  </author>
 
- {% for post in site.posts %}
+ 
  <entry>
-   <title>{{ post.title }}</title>
-   <link href="{{ site.production_url }}{{ post.url }}"/>
-   <updated>{{ post.date | date_to_xmlschema }}</updated>
-   <id>{{ site.production_url }}{{ post.id }}</id>
-   <content type="html">{{ post.content | xml_escape }}</content>
+   <title>C++ Primer -- Chap019</title>
+   <link href="http://carlsama.github.io/c++/2014/04/14/C++-Primer-Chap19-Special_Tech.html"/>
+   <updated>2014-04-14T00:00:00+08:00</updated>
+   <id>http://carlsama.github.io/c++/2014/04/14/C++-Primer-Chap19-Special_Tech</id>
+   <content type="html">&lt;h1&gt;#&lt;/h1&gt;
+
+&lt;p&gt;new表达式执行的过程:
+1. 调用operator new 的标准库函数,分配原始空间
+2. 运行构造函数并传入初始值
+3. 构造完成后返回指向该对象的指针&lt;/p&gt;
+
+&lt;p&gt;delete表达式执行的过程:
+1. 执行析构函数
+2. 调用operator delete 的标准库函数释放内存空间&lt;/p&gt;
+</content>
  </entry>
- {% endfor %}
+ 
+ <entry>
+   <title>C++ Primer -- Chap014</title>
+   <link href="http://carlsama.github.io/c++/2014/04/14/C++-Primer-Chap14-Overlaod_Cast.html"/>
+   <updated>2014-04-14T00:00:00+08:00</updated>
+   <id>http://carlsama.github.io/c++/2014/04/14/C++-Primer-Chap14-Overlaod_Cast</id>
+   <content type="html">&lt;h2&gt;&lt;/h2&gt;
+
+&lt;h3&gt;与原函数的不同&lt;/h3&gt;
+
+&lt;p&gt;运算符的求值顺序无法引用到重载运算符&lt;/p&gt;
+
+&lt;blockquote&gt;&lt;p&gt;&amp;amp;&amp;amp;和||无法保留短路属性,因此不建议重载
+C++已经定义了.和&amp;amp;运算符用于类类型的特殊含义,一般不重载&lt;/p&gt;&lt;/blockquote&gt;
+
+&lt;h3&gt;成员还是非成员?&lt;/h3&gt;
+
+&lt;ol&gt;
+&lt;li&gt;&lt;p&gt;=, [], (), -&gt;必须是成员&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;复合运算符一般是成员&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;改变对象状态的运算符或与给定类型密切相关的类型,应为成员&lt;/p&gt;
+
+&lt;blockquote&gt;&lt;p&gt;++, --, *(解印用)&lt;/p&gt;&lt;/blockquote&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;具有对称性的运算符(算数,相等性,关系和位运算符等),非成员&lt;/p&gt;&lt;/li&gt;
+&lt;/ol&gt;
+
+
+&lt;h3&gt;&gt;&gt; &amp;lt;&amp;lt;&lt;/h3&gt;
+
+&lt;p&gt;尽量减少格式化操作&lt;/p&gt;
+
+&lt;p&gt;必须是非成员函数&lt;/p&gt;
+
+&lt;blockquote&gt;&lt;p&gt;否则左侧对象必须时类的对象,这就隐含要求了类是iostream对象.我们不能修改标准库 :(&lt;/p&gt;&lt;/blockquote&gt;
+
+&lt;p&gt;输入运算符(&gt;&gt;)要处理输入失败的情况,负责从错误中恢复.&lt;/p&gt;
+
+&lt;blockquote&gt;&lt;p&gt;读取错误类型
+eof或其他错误&lt;/p&gt;&lt;/blockquote&gt;
+
+&lt;h3&gt;下标运算符&lt;/h3&gt;
+
+&lt;p&gt;通常定义两个版本,根据对象的类型来决定&lt;/p&gt;
+
+&lt;blockquote&gt;&lt;p&gt;返回普通引用
+返回常量引用&lt;/p&gt;&lt;/blockquote&gt;
+
+&lt;h3&gt;++ --&lt;/h3&gt;
+
+&lt;p&gt;前置版本:&lt;/p&gt;
+
+&lt;blockquote&gt;&lt;p&gt;Base&amp;amp; operator ++/-- ();需要返回对象
+引用是为了符合内置类型&lt;/p&gt;&lt;/blockquote&gt;
+
+&lt;p&gt;后置版本:&lt;/p&gt;
+
+&lt;blockquote&gt;&lt;p&gt;Base operator ++/-- (int);返回的是之前的值,因为无需用到实参的值,所以不需命名&lt;/p&gt;&lt;/blockquote&gt;
+
+&lt;h3&gt;成员访问运算符&lt;/h3&gt;
+
+&lt;h3&gt;调用运算符&lt;/h3&gt;
+
+&lt;p&gt;可调用对象-&gt; 定义了调用运算符&lt;/p&gt;
+
+&lt;h2&gt;类型转换&lt;/h2&gt;
+
+&lt;p&gt;operator type () const;&lt;/p&gt;
+
+&lt;p&gt;为了防止类型转换产生意外的结果(cin&amp;lt;&amp;lt;s),c++11引入了显示的类型转换运算符&lt;/p&gt;
+
+&lt;blockquote&gt;&lt;p&gt;当表达式出现在条件判断的地方,会隐式的执行显式转换&lt;/p&gt;&lt;/blockquote&gt;
+
+&lt;h3&gt;有二义性的类型转换&lt;/h3&gt;
+
+&lt;p&gt;不要让两个类执行相同的类型转换
+A中有B为参数的构造函数,而B中有A的类型转换,会带来二义性错误&lt;/p&gt;
+
+&lt;blockquote&gt;&lt;p&gt;A a = b; 同时存在有两种由B获得A的方法&lt;/p&gt;&lt;/blockquote&gt;
+
+&lt;p&gt;避免转换目标是内置算数类型&lt;/p&gt;
+
+&lt;blockquote&gt;&lt;p&gt;operator int() const;
+operator double() const;&lt;/p&gt;&lt;/blockquote&gt;
+
+&lt;h3&gt;&lt;/h3&gt;
+
+&lt;p&gt;a sym b&lt;/p&gt;
+
+&lt;blockquote&gt;&lt;p&gt;a.operator sym(b) a的成员函数
+operator sym(b) 普通函数&lt;/p&gt;&lt;/blockquote&gt;
+</content>
+ </entry>
+ 
+ <entry>
+   <title>C++ Primer -- Chap013</title>
+   <link href="http://carlsama.github.io/c++/2014/04/14/C++-Primer-Chap13-Copy_Control.html"/>
+   <updated>2014-04-14T00:00:00+08:00</updated>
+   <id>http://carlsama.github.io/c++/2014/04/14/C++-Primer-Chap13-Copy_Control</id>
+   <content type="html">&lt;h2&gt;copy-cons(构造)&lt;/h2&gt;
+
+&lt;p&gt;拷贝控制函数不为explicit&lt;/p&gt;
+
+&lt;p&gt;初始化过程&lt;/p&gt;
+
+&lt;blockquote&gt;&lt;p&gt;直接初始化  string s(d);  // 拷贝构造函数
+拷贝初始化  string s = d; // 拷贝构造函数(如果有移动构造函数,有时使用移动)&lt;/p&gt;&lt;/blockquote&gt;
+
+&lt;p&gt;拷贝初始化应用场景:&lt;/p&gt;
+
+&lt;blockquote&gt;&lt;p&gt;引用方式的参数传递
+返回非引用类型(产生临时变量)
+insert/push(emplace使用直接初始化)&lt;/p&gt;&lt;/blockquote&gt;
+
+&lt;p&gt;拷贝构造函数被用来初始化非引用类型参数,如果其参数不是引用类型,那么为了调用拷贝构造函数,我们必须产生实参的拷贝,再次调用拷贝构造函数,陷入无限循环.&lt;/p&gt;
+
+&lt;h2&gt;copy-assign(赋值)&lt;/h2&gt;
+
+&lt;h2&gt;de-cons&lt;/h2&gt;
+
+&lt;p&gt;析构函数释放对象所使用的资源,并销毁所有非static对象.&lt;/p&gt;
+
+&lt;p&gt;构造函数: 列表初始化顺序 -&gt; 函数体
+析构函数: 函数体 -&gt; 按初始化的逆序销毁&lt;/p&gt;
+
+&lt;blockquote&gt;&lt;p&gt;并不直接销毁成员&lt;/p&gt;&lt;/blockquote&gt;
+
+&lt;p&gt;&lt;strong&gt;隐式的销毁一个内置指针成员不会delete它所指向的对象&lt;/strong&gt;
+&lt;strong&gt;使用智能指针/函数体内delete&lt;/strong&gt;&lt;/p&gt;
+
+&lt;h2&gt;三/五法则&lt;/h2&gt;
+
+&lt;p&gt;如果一个类需要析构函数,那么它也需要一个拷贝构造函数和拷贝赋值函数.&lt;/p&gt;
+
+&lt;p&gt;需要拷贝操作也需要赋值操作,反之亦然.&lt;/p&gt;
+
+&lt;h2&gt;阻止拷贝&lt;/h2&gt;
+
+&lt;p&gt;Base(Base&amp;amp;) &lt;strong&gt;= delete&lt;/strong&gt;; // 阻止拷贝
+Base&amp;amp; operator = (const Base&amp;amp;) &lt;strong&gt;= delete&lt;/strong&gt;; //阻止赋值&lt;/p&gt;
+
+&lt;p&gt;在新标准之前,是通过将拷贝构造函数和赋值构造函数声明为private来阻止.&lt;/p&gt;
+
+&lt;blockquote&gt;&lt;p&gt;友元仍然能够拷贝(编译不报错).所以我们&lt;strong&gt;只声明不定义&lt;/strong&gt;(链接错误).&lt;/p&gt;&lt;/blockquote&gt;
+
+&lt;h2&gt;资源管理&lt;/h2&gt;
+
+&lt;p&gt;可以定义拷贝操作,使类的行为看起来像值或指针(共享).&lt;/p&gt;
+
+&lt;h3&gt;像指针的类&lt;/h3&gt;
+
+&lt;ol&gt;
+&lt;li&gt;&lt;p&gt;使用shared_ptr来管理资源.拷贝(或赋值)一个shared_ptr会拷贝(或赋值)shared_ptr指向的指针.shared_ptr自己记录共享的用户,当没有用户时,shared_ptr负责释放资源.&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;可以使用引用计数来直接管理资源.&lt;/p&gt;
+
+&lt;blockquote&gt;&lt;p&gt;要使用动态分配的空间来实现共享计数器.&lt;/p&gt;&lt;/blockquote&gt;&lt;/li&gt;
+&lt;/ol&gt;
+
+
+&lt;h2&gt;交换操作&lt;/h2&gt;
+
+&lt;p&gt;更想使用自己实现的交换指针或引用的swap函数&lt;/p&gt;
+
+&lt;blockquote&gt;&lt;p&gt;using std::swap&lt;/p&gt;&lt;/blockquote&gt;
+
+&lt;h2&gt;移动构造函数&lt;/h2&gt;
+
+&lt;p&gt;注意:不能被拷贝-&gt; IO对象,指针&lt;/p&gt;
+
+&lt;p&gt;移动构造函数不分配任何新内存,它接管源对象的内存(并非对象的值).&lt;/p&gt;
+
+&lt;blockquote&gt;&lt;p&gt;对于指针类型,我们接管后设置为nullptr(保证源对象在移动之后处于可析构状态)&lt;/p&gt;&lt;/blockquote&gt;
+
+&lt;p&gt;在移动操作之后,源对象必须保持有效的,可析构的状态,但是用户不能对其值做任何假设.&lt;/p&gt;
+
+&lt;h3&gt;合成的移动构造函数&lt;/h3&gt;
+
+&lt;p&gt;如果我们不声明拷贝构造函数或拷贝赋值运算符,编译器&lt;strong&gt;总会&lt;/strong&gt;合成.
+如果一个类定义了拷贝构造函数,拷贝运算符或者析构函数,编译器不会为它合成移动构造函数和移动赋值运算符.&lt;/p&gt;
+
+&lt;h2&gt;右值引用&lt;/h2&gt;
+
+&lt;p&gt;&amp;amp;&amp;amp;来获取.只能绑定到即将销毁&lt;/p&gt;
+
+&lt;p&gt;标准库的move函数, 我们可以销毁源对象,也可以对它赋值,但是不能使用它的值.&lt;/p&gt;
+
+&lt;blockquote&gt;&lt;p&gt;int &amp;amp;&amp;amp; rr = std::move(dd)&lt;/p&gt;&lt;/blockquote&gt;
+</content>
+ </entry>
+ 
+ <entry>
+   <title>C++ Primer -- Chap12</title>
+   <link href="http://carlsama.github.io/c++/2014/04/14/C++-Primer-Chap12-Memory.html"/>
+   <updated>2014-04-14T00:00:00+08:00</updated>
+   <id>http://carlsama.github.io/c++/2014/04/14/C++-Primer-Chap12-Memory</id>
+   <content type="html">&lt;h2&gt;智能指针&lt;/h2&gt;
+
+&lt;p&gt;位于memory头文件中.(使用前检查)&lt;/p&gt;
+
+&lt;p&gt;shared_ptr在无用之后仍然存在的情况:&lt;/p&gt;
+
+&lt;blockquote&gt;&lt;p&gt;将shared_ptr存储在容器中,最后应该earse删除,否则不会自动释放&lt;/p&gt;&lt;/blockquote&gt;
+
+&lt;p&gt;unique_ptr&lt;/p&gt;
+
+&lt;blockquote&gt;&lt;p&gt;u.release() 放弃指向
+u.reset() 释放
+u.reset(nullptr) 重指向&lt;/p&gt;&lt;/blockquote&gt;
+</content>
+ </entry>
+ 
+ <entry>
+   <title>C++ Primer -- Chap10</title>
+   <link href="http://carlsama.github.io/c++/2014/04/14/C++-Primer-Chap10-Generic_Algorithm.html"/>
+   <updated>2014-04-14T00:00:00+08:00</updated>
+   <id>http://carlsama.github.io/c++/2014/04/14/C++-Primer-Chap10-Generic_Algorithm</id>
+   <content type="html">&lt;h2&gt;只读算法&lt;/h2&gt;
+
+&lt;p&gt;accumulate(begin,end,base)&lt;/p&gt;
+
+&lt;p&gt;equal(left.cbegin, left.cend, right.cbegin)&lt;/p&gt;
+</content>
+ </entry>
+ 
+ <entry>
+   <title>C++ Primer -- Chap09</title>
+   <link href="http://carlsama.github.io/c++/2014/04/14/C++-Primer-Chap09-Sequential_Container.html"/>
+   <updated>2014-04-14T00:00:00+08:00</updated>
+   <id>http://carlsama.github.io/c++/2014/04/14/C++-Primer-Chap09-Sequential_Container</id>
+   <content type="html">&lt;h2&gt;&lt;/h2&gt;
+
+&lt;p&gt;由于移动构造函数,新标准库的容器性能优于旧的.&lt;/p&gt;
+
+&lt;p&gt;vector&lt;/p&gt;
+
+&lt;p&gt;array&lt;/p&gt;
+
+&lt;blockquote&gt;&lt;p&gt;大小固定&lt;/p&gt;&lt;/blockquote&gt;
+
+&lt;p&gt;string&lt;/p&gt;
+
+&lt;p&gt;deque&lt;/p&gt;
+
+&lt;p&gt;list
+forward_list&lt;/p&gt;
+
+&lt;blockquote&gt;&lt;p&gt;不支持随机访问&lt;/p&gt;&lt;/blockquote&gt;
+
+&lt;h3&gt;常用操作&lt;/h3&gt;
+
+&lt;p&gt;列表初始化&lt;/p&gt;
+
+&lt;p&gt;a.swap(b)&lt;/p&gt;
+
+&lt;p&gt;c.emplace(inits) 使用inits构造c中元素&lt;/p&gt;
+
+&lt;p&gt;c.assign(iter, iter)&lt;/p&gt;
+
+&lt;blockquote&gt;&lt;p&gt;从不同但相容的类型赋值&lt;/p&gt;&lt;/blockquote&gt;
+</content>
+ </entry>
+ 
+ <entry>
+   <title>C++ Primer -- Chap08</title>
+   <link href="http://carlsama.github.io/c++/2014/04/14/C++-Primer-Chap08-IO.html"/>
+   <updated>2014-04-14T00:00:00+08:00</updated>
+   <id>http://carlsama.github.io/c++/2014/04/14/C++-Primer-Chap08-IO</id>
+   <content type="html">&lt;h1&gt;IO class&lt;/h1&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;不能对IO对象拷贝或赋值.&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;通常以引用(&amp;amp;)的方式传递.&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;读写IO对象会改变其状态,因此传递和返回的引用不能时const.&lt;/p&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+
+&lt;h2&gt;iostream&lt;/h2&gt;
+
+&lt;h3&gt;条件状态&lt;/h3&gt;
+
+&lt;p&gt;IO库定义了一个与机器无关的iostate类型,它提供了表达式状态的完整功能.ls&lt;/p&gt;
+
+&lt;p&gt;|状态|解释|函数|
+|&lt;em&gt;---&lt;/em&gt;|&lt;em&gt;---&lt;/em&gt;|&lt;em&gt;---&lt;/em&gt;|
+|strm::iostate|机器无关类型||
+|strm::badbit|流已崩溃(不可恢复错误)|s.bad()|
+|strm::failbit|IO操作失败(可恢复错误)|s.fail()|
+|strm::eofbit|流到达文件末尾|s.eof()|
+|strm::goodbit|流未出错,值为0|s.good()|
+|s.clear()|状态复位||
+|s.clear(flags)|根据类型复位||
+|s.setstate(flags)|置位||
+|s.rdstate()|返回当前状态||&lt;/p&gt;
+
+&lt;p&gt;eg. cin.clear(cin.rdstate() &amp;amp; ~cin.failbit &amp;amp; ~cin.badbit)&lt;/p&gt;
+
+&lt;h3&gt;缓冲&lt;/h3&gt;
+
+&lt;p&gt;由于设备的写操作可能很费时,允许操作将多个输出合成单一的设备写操作.&lt;/p&gt;
+
+&lt;p&gt;缓冲被刷新的原因:&lt;/p&gt;
+
+&lt;ol&gt;
+&lt;li&gt;程序正常结束&lt;/li&gt;
+&lt;li&gt;缓冲区满&lt;/li&gt;
+&lt;li&gt;用操作符显式刷新(endl, flush, ends)&lt;/li&gt;
+&lt;li&gt;使用unitbuf(每次写操作后立即刷新)来清空缓冲区
+
+&lt;blockquote&gt;&lt;p&gt;cout&amp;lt;&amp;lt;unitbuf
+cout&amp;lt;&amp;lt;nounitbuf&lt;/p&gt;&lt;/blockquote&gt;&lt;/li&gt;
+&lt;li&gt;输出流别关联到另一个流(s.tie(x)/ s.tie())&lt;/li&gt;
+&lt;/ol&gt;
+
+
+&lt;h2&gt;fstream&lt;/h2&gt;
+
+&lt;p&gt;对一个已经打开的文件调用open会失败,并导致failbit被置位.&lt;/p&gt;
+
+&lt;p&gt;|文件模式|说明|
+|&lt;em&gt;---&lt;/em&gt;|&lt;em&gt;---&lt;/em&gt;|
+|in|读|
+|out|写|
+|app|写操作时定位到文件尾|
+|ate|打开文件定位到文件尾|
+|trunc|截断文件|
+|binary|二进制方式打开|&lt;/p&gt;
+
+&lt;ol&gt;
+&lt;li&gt;out/in只能针对fstream对象&lt;/li&gt;
+&lt;li&gt;out默认附带trunc&lt;/li&gt;
+&lt;li&gt;没有设定trunc时,可以设定app&lt;/li&gt;
+&lt;/ol&gt;
+
+
+&lt;h2&gt;sstream&lt;/h2&gt;
+
+&lt;p&gt;|操作|解释|
+|&lt;em&gt;---&lt;/em&gt;|&lt;em&gt;---&lt;/em&gt;|
+|s.str()|返回s保存的string拷贝|
+|s.str(n)|将n拷贝到s中,返回void|&lt;/p&gt;
+</content>
+ </entry>
+ 
+ <entry>
+   <title>C++ Primer -- Chap07</title>
+   <link href="http://carlsama.github.io/c++/2014/04/14/C++-Primer-Chap07-Class.html"/>
+   <updated>2014-04-14T00:00:00+08:00</updated>
+   <id>http://carlsama.github.io/c++/2014/04/14/C++-Primer-Chap07-Class</id>
+   <content type="html">&lt;h1&gt;类&lt;/h1&gt;
+
+&lt;p&gt;类的基本思想是data abstraction和encapsulation.&lt;/p&gt;
+
+&lt;blockquote&gt;&lt;p&gt;data abstraction是依赖于interface和implementation分离的编程技术
+encapsulation实现了interface和implementation的分离.&lt;/p&gt;&lt;/blockquote&gt;
+
+&lt;h2&gt;封装&lt;/h2&gt;
+
+&lt;p&gt;访问说明符(access spedifiers)&lt;/p&gt;
+
+&lt;blockquote&gt;&lt;p&gt;使用class和struct的唯一区别是默认的访问权限.
+一个类就是一个作用域:类外定义成员函数需要提供作用域.
+函数的返回类型位于函数名之前,需要时加上作用域指示符.&lt;/p&gt;&lt;/blockquote&gt;
+
+&lt;h2&gt;函数&lt;/h2&gt;
+
+&lt;p&gt;定义在类内部的函数是隐式的inline函数.&lt;/p&gt;
+
+&lt;h2&gt;类的声明&lt;/h2&gt;
+
+&lt;p&gt;类在声明之后,定义之前是一个不完全类型(incomplete type):可以定义其引用或指针,可以声明(非定义)以不完全类型为参数或返回值类型的函数.&lt;/p&gt;
+
+&lt;blockquote&gt;&lt;p&gt;因此,一旦类名出现后,就允许包含指向自身的引用或指针&lt;/p&gt;&lt;/blockquote&gt;
+
+&lt;h2&gt;this&lt;/h2&gt;
+
+&lt;p&gt;成员函数通过this指针来访问调用它的对象.当我们调用成员函数时,用请求该函数的对象地址初始化this.&lt;/p&gt;
+
+&lt;h3&gt;const + this&lt;/h3&gt;
+
+&lt;p&gt;默认情况下,this的类型是指向&lt;strong&gt;非常量版本类类型&lt;/strong&gt;的&lt;strong&gt;常量指针&lt;/strong&gt;.&lt;/p&gt;
+
+&lt;p&gt;在const成员函数中,this是&lt;strong&gt;指向常量的常量指针&lt;/strong&gt;,所以此时无法通过this指针来修改类成员,因此我们就不能调用普通成员函数.&lt;/p&gt;
+
+&lt;h2&gt;类作用域和成员函数&lt;/h2&gt;
+
+&lt;p&gt;编译器分两步来处理类:首先编译成员的声明,(此时类成员可见)然后是定义在类内部的成员函数体&lt;/p&gt;
+
+&lt;blockquote&gt;&lt;p&gt;用来定义类型的成员必须先定义后使用,与普通成员不同.
+inline函数和constexpr函数通常定义在头文件.&lt;/p&gt;&lt;/blockquote&gt;
+
+&lt;h3&gt;类型名的特殊处理&lt;/h3&gt;
+
+&lt;p&gt;在类中,如果成员使用了外层作用域中的某个名字,该名字代表某种类型,则类之后不能重定义这种类型.&lt;/p&gt;
+
+&lt;blockquote&gt;&lt;p&gt;类型名的定义通常出现在类的开始处.&lt;/p&gt;&lt;/blockquote&gt;
+
+&lt;h2&gt;构造函数&lt;/h2&gt;
+
+&lt;p&gt;构造函数不能声明为const的.当我们创建一个const对象时,直到构造函数完成初始化,对象才获得&quot;常量&quot;属性.&lt;/p&gt;
+
+&lt;p&gt;1 default constructor(无参)&lt;/p&gt;
+
+&lt;p&gt;2 synthesized default constructor(编译器合成)&lt;/p&gt;
+
+&lt;blockquote&gt;&lt;p&gt;如果存在&lt;strong&gt;类内初始值&lt;/strong&gt;,用它初始化
+否则,默认初始化(与类型及位置有关)该成员,如果定义在块中的内置类型或复合类型对象被默认初始化,值未定义.&lt;/p&gt;&lt;/blockquote&gt;
+
+&lt;p&gt;3 constructor initialize list(构造函数初始值列表)&lt;/p&gt;
+
+&lt;blockquote&gt;&lt;p&gt;当某个数据成员被列表忽略时,将以合成的默认构造函数方式隐式初始化(类内初始值或默认初始化)
+对于const,引用或为提供默认构造函数的类类型,必须对其初始化而非赋值&lt;/p&gt;&lt;/blockquote&gt;
+
+&lt;p&gt;4 delegating constructor&lt;/p&gt;
+
+&lt;h3&gt;隐式类类型转换&lt;/h3&gt;
+
+&lt;p&gt;如果构造函数只接受一个实参,则它实际上定义了转换为此类的隐式转换机制.这种构造函数也称为转换构造函数(converting constructor).&lt;/p&gt;
+
+&lt;blockquote&gt;&lt;p&gt;只允许一步转换
+可以添加explicit来抑制隐式转换,只能直接初始化&lt;/p&gt;&lt;/blockquote&gt;
+
+&lt;p&gt;构造函数执行过程:&lt;/p&gt;
+
+&lt;ol&gt;
+&lt;li&gt;初始值列表&lt;/li&gt;
+&lt;li&gt;默认初始化&lt;/li&gt;
+&lt;li&gt;函数体&lt;/li&gt;
+&lt;/ol&gt;
+
+
+&lt;h2&gt;友元&lt;/h2&gt;
+
+&lt;p&gt;友元关系不具有传递性.&lt;/p&gt;
+
+&lt;p&gt;友元声明的作用是&lt;strong&gt;影响访问权限&lt;/strong&gt;,本身并不是普通意义上的声明,类内其他函数要使用友元函数只能等到其正式声明.&lt;/p&gt;
+
+&lt;h2&gt;聚合类(aggregate class)&lt;/h2&gt;
+
+&lt;h2&gt;静态成员&lt;/h2&gt;
+
+&lt;h3&gt;变量&lt;/h3&gt;
+
+&lt;p&gt;不属于任一对象,所以不在构造函数中初始化.&lt;/p&gt;
+
+&lt;blockquote&gt;&lt;p&gt;类内部初始化静态成员: &lt;strong&gt;static constexpr&lt;/strong&gt; int count = 0;(通常也应该在外部定义一下)
+类外部声明和定义&lt;/p&gt;&lt;/blockquote&gt;
+
+&lt;p&gt;静态成员可以是不完全类型.&lt;/p&gt;
+
+&lt;blockquote&gt;&lt;p&gt;In class Bar
+static Bar mem; OK
+Bar* mem; OK
+Bar mem; NO&lt;/p&gt;&lt;/blockquote&gt;
+
+&lt;p&gt;可以用静态成员做默认实参&lt;/p&gt;
+
+&lt;blockquote&gt;&lt;p&gt;void clear(char = bkground);&lt;/p&gt;&lt;/blockquote&gt;
+
+&lt;h3&gt;函数&lt;/h3&gt;
+
+&lt;p&gt;静态成员函数无this指针,因此:&lt;/p&gt;
+
+&lt;blockquote&gt;&lt;p&gt;不能声明为const.
+不能在其中使用this指针.&lt;/p&gt;&lt;/blockquote&gt;
+
+&lt;h2&gt;访问控制&lt;/h2&gt;
+
+&lt;p&gt;类内:
+    protected -&gt; 子类\类内函数\frined类访问&lt;/p&gt;
+
+&lt;p&gt;继承:
+    private属性不能被继承
+    private继承 -&gt; protected和public在子类中变为private
+    public继承  -&gt; protected和public在子类中保持
+    protected继承-&gt;protected和public在子类中变为protected&lt;/p&gt;
+</content>
+ </entry>
+ 
+ <entry>
+   <title>C++ Primer -- Chap06</title>
+   <link href="http://carlsama.github.io/c++/2014/04/14/C++-Primer-Chap06-Function.html"/>
+   <updated>2014-04-14T00:00:00+08:00</updated>
+   <id>http://carlsama.github.io/c++/2014/04/14/C++-Primer-Chap06-Function</id>
+   <content type="html">&lt;h2&gt;parameter&lt;/h2&gt;
+
+&lt;h3&gt;数组形参&lt;/h3&gt;
+
+&lt;p&gt;不允许拷贝数组,所以不能返回数组,只能返回数组的指针.
+使用数组时(通常)将数组转换成指针.&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;提供数组长度的三种方式:
+  1 数组中使用特殊标记
+  2 使用标准库规范begin,end
+  3 显示传递数组大小&lt;/li&gt;
+&lt;/ul&gt;
+
+
+&lt;p&gt;当形参使用数组的引用时,数组的维度是类型的一部分.&lt;/p&gt;
+
+&lt;blockquote&gt;&lt;p&gt;void print(int (&amp;amp;arr)[10])
+  for(auto elem : arr)
+      cout&amp;lt;&amp;lt;elem;&lt;/p&gt;&lt;/blockquote&gt;
+
+&lt;h4&gt;含有可变形参的函数&lt;/h4&gt;
+
+&lt;p&gt;1 如果所有实参的类型相同且数量未知,可以传递名为initializer_list的标准库类型&lt;/p&gt;
+
+&lt;blockquote&gt;&lt;p&gt;see main.cpp for more information :)&lt;/p&gt;&lt;/blockquote&gt;
+
+&lt;p&gt;2&lt;/p&gt;
+
+&lt;h3&gt;返回复杂类型的函数&lt;/h3&gt;
+
+&lt;p&gt;1 使用别名
+2 尾置返回类型(trailing return type)
+3 decltype&lt;/p&gt;
+
+&lt;blockquote&gt;&lt;p&gt;see main.cpp for more information&lt;/p&gt;&lt;/blockquote&gt;
+
+&lt;h3&gt;重载与const&lt;/h3&gt;
+
+&lt;p&gt;当存在底层const和非const决定的重载函数时&lt;/p&gt;
+
+&lt;blockquote&gt;&lt;p&gt;使用底层const对象调用,则只能匹配到特定版本.因为底层const不能转换为非const
+使用非底层const对象调用,原则上都可以转换,但是编译器优先调用非const版本.&lt;/p&gt;&lt;/blockquote&gt;
+</content>
+ </entry>
+ 
+ <entry>
+   <title>C++ Primer Chap05 Statement</title>
+   <link href="http://carlsama.github.io/2014/04/14/C++-Primer-Chap05-Statement.html"/>
+   <updated>2014-04-14T00:00:00+08:00</updated>
+   <id>http://carlsama.github.io/2014/04/14/C++-Primer-Chap05-Statement</id>
+   <content type="html">&lt;p&gt;---                                                                                 layout : post
+time : 2014-4-14
+title : C++ Primer -- Chap05
+category : C++
+keywrods : C++, C++ Primer
+tags : C++&lt;/p&gt;
+
+&lt;h2&gt;description : my reading notes about C++ Primer chap 5&lt;/h2&gt;
+
+&lt;h2&gt;语句&lt;/h2&gt;
+
+&lt;ul&gt;
+&lt;li&gt;复合语句(compound statement)是指用花括号括起来的语句和声明序列.也称为块(block).&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;https://github.com/ThreeCobblers/Paladin/blob/master/blog/C%2B%2B/sosohu/chap5.md&quot;&gt;switch语句&lt;/a&gt;
+
+&lt;h2&gt;异常处理&lt;/h2&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;https://github.com/ThreeCobblers/Paladin/blob/master/blog/C%2B%2B/sosohu/chap5.md&quot;&gt;程序出错的处理方式&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;throw expression. 引发(raise)异常.&lt;/li&gt;
+&lt;li&gt;try block. try语句块以关键字try开始,并以几个catch clause结束.
+|位置|异常|介绍|
+|:----:|:----:|:----:|
+|exception头文件|exception class|只报告异常,不提供额外信息|
+|stdexcept头文件|....|常用的异常类, what()返回内容|
+|new头文件|bad_alloc||
+|type_info头文件|bad_cast||
+
+&lt;blockquote&gt;&lt;p&gt;See main.cpp for more information.&lt;/p&gt;&lt;/blockquote&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+
+&lt;h3&gt;栈展开&lt;/h3&gt;
+
+&lt;p&gt;当throw出现在try语句块内时,检查与该try关联的catch语句.如果找到了,就使用其处理异常.否则就退出当前函数,在外层函数中继续查找.可能最后一直没有找到匹配的catch,程序调用terminate.&lt;/p&gt;
+
+&lt;p&gt;在栈展开的过程中,编译器将确保创建的对象被正确的销毁.&lt;/p&gt;
+
+&lt;blockquote&gt;&lt;p&gt;调用析构函数&lt;/p&gt;&lt;/blockquote&gt;
+</content>
+ </entry>
+ 
+ <entry>
+   <title>C++ Primer Chap04 Expression</title>
+   <link href="http://carlsama.github.io/2014/04/14/C++-Primer-Chap04-Expression.html"/>
+   <updated>2014-04-14T00:00:00+08:00</updated>
+   <id>http://carlsama.github.io/2014/04/14/C++-Primer-Chap04-Expression</id>
+   <content type="html">&lt;p&gt;---                                                                                 layout : post
+time : 2014-4-14
+title : C++ Primer -- Chap04
+category : C++
+keywrods : C++, C++ Primer
+tags : C++&lt;/p&gt;
+
+&lt;h2&gt;description : my reading notes about C++ Primer chap 4&lt;/h2&gt;
+
+&lt;h2&gt;expression&lt;/h2&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;对象被当做左值使用时,用的是内存中的位置;对象被当做右值只用时,用的是内容.&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;使用关键字decltype时:&lt;/p&gt;
+
+&lt;blockquote&gt;&lt;p&gt;表达式求值结果为左值,decltype作用于该表达式得到引用类型: decltype(*p)
+右值,非引用&lt;/p&gt;&lt;/blockquote&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+
+&lt;h3&gt;&amp;amp;&amp;amp; ||&lt;/h3&gt;
+
+&lt;ul&gt;
+&lt;li&gt;short-cicut evaluation&lt;/li&gt;
+&lt;/ul&gt;
+
+
+&lt;h3&gt;关系运算符&lt;/h3&gt;
+
+&lt;ul&gt;
+&lt;li&gt;左结合&lt;/li&gt;
+&lt;/ul&gt;
+
+
+&lt;h3&gt;赋值运算符&lt;/h3&gt;
+
+&lt;ul&gt;
+&lt;li&gt;右结合&lt;/li&gt;
+&lt;/ul&gt;
+
+
+&lt;h3&gt;sizeof&lt;/h3&gt;
+
+&lt;ul&gt;
+&lt;li&gt;面对数组和指针的差异.&lt;/li&gt;
+&lt;/ul&gt;
+
+
+&lt;h3&gt;逗号表达式&lt;/h3&gt;
+
+&lt;ul&gt;
+&lt;li&gt;从左往右依次计算.&lt;/li&gt;
+&lt;/ul&gt;
+
+
+&lt;h2&gt;类型转换&lt;/h2&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;无符号 &amp;amp; 有符号类型不一致时&lt;/p&gt;
+
+&lt;blockquote&gt;&lt;p&gt;无符号类型不小于有符号类型,转换为无符号类型.(unsigned int 和 int -&gt; unsigned int)
+无符号类型小于有符号类型,转换结果依赖于机器.(unsigned int 和 long long -&gt; long long)&lt;/p&gt;&lt;/blockquote&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;显示类型转换&lt;/p&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+
+&lt;p&gt;static_cast&lt;type-id&gt;(expression)&lt;/p&gt;
+
+&lt;p&gt;没有运行时检查来保证转换的安全性&lt;/p&gt;
+
+&lt;ol&gt;
+&lt;li&gt;&lt;p&gt;基类指针转换为派生类指针&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;built-in type之间的转换&lt;/p&gt;
+
+&lt;blockquote&gt;&lt;p&gt;告诉编译器我们不在意精度损失,关闭警告&lt;/p&gt;&lt;/blockquote&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;找回void指针或设置为void指针&lt;/p&gt;
+
+&lt;blockquote&gt;&lt;p&gt;double * p = static_cast&lt;double *&gt;(void *)&lt;/p&gt;&lt;/blockquote&gt;&lt;/li&gt;
+&lt;/ol&gt;
+
+
+&lt;p&gt;dynamic_cast&lt;type-id&gt;(expression)&lt;/p&gt;
+
+&lt;p&gt;要求:type-id必须是指针,引用或者void*&lt;/p&gt;
+
+&lt;ol&gt;
+&lt;li&gt;&lt;p&gt;进行基类指针与派生类指针之间的转换(不同层)&lt;/p&gt;
+
+&lt;blockquote&gt;&lt;p&gt;进行类型检查,比static_cast更安全
+需要有虚函数(由于运行时检查需要运行时类型信息,这个信息存储在虚函数表中)&lt;/p&gt;&lt;/blockquote&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;同层之间的转换&lt;/p&gt;
+
+&lt;blockquote&gt;&lt;p&gt;static_cast不允许
+dynamic_cast结果为0&lt;/p&gt;&lt;/blockquote&gt;&lt;/li&gt;
+&lt;/ol&gt;
+
+
+&lt;p&gt;reinpreter_cast&lt;type-id&gt;(expression)&lt;/p&gt;
+
+&lt;p&gt;type-id必须是一个指针,引用,算数类型,函数指针或者成员指针.它可以在指针和整数之间转换,&lt;/p&gt;
+
+&lt;p&gt;const_cast&lt;type-id&gt;(expression)
+去除const和volatile属性.type-id要为指针，引用．
+可以去除底层const&lt;/p&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-c--&quot; data-lang=&quot;c++&quot;&gt;int j = 10;
+const int * ptr = &amp;amp;j;
+(*(const_cast&amp;lt;int*&amp;gt;(i))) = 0;
+cout&amp;lt;&amp;lt;j&amp;lt;&amp;lt;endl; // 0&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+
+
+</content>
+ </entry>
+ 
+ <entry>
+   <title>C++ Primer -- Chap03</title>
+   <link href="http://carlsama.github.io/c++/2014/04/14/C++-Primer-Chap03-String-Vector-Array.html"/>
+   <updated>2014-04-14T00:00:00+08:00</updated>
+   <id>http://carlsama.github.io/c++/2014/04/14/C++-Primer-Chap03-String-Vector-Array</id>
+   <content type="html">&lt;h2&gt;namespace&lt;/h2&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://github.com/ThreeCobblers/Paladin/blob/master/blog/C%2B%2B/sosohu/chap3.md&quot;&gt;About how to using namespace&lt;/a&gt;&lt;/p&gt;
+
+&lt;h2&gt;string&lt;/h2&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;getline()得到的string对象不包括换行符&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;size()返回值类型为string::size_t,是无符号数且足够存储下任一string对象的大小.&lt;/p&gt;
+
+&lt;blockquote&gt;&lt;p&gt;可借助auto / decltype推断
+如果在表达式中使用了size(),就应避免使用有符号数带来的混乱
+&lt;strong&gt;下标&lt;/strong&gt;使用string:size_t类型&lt;/p&gt;&lt;/blockquote&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;string中字符特性[详见primer 82]&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;string.c_str()获取c风格&lt;/p&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+
+&lt;h2&gt;vector&lt;/h2&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;使用圆括号初始化: vector&lt;int&gt; v(10,1); 表示construct. 如果省略初始值:v(10),则为值初始化(value-initialized),初始值由对象类型决定.&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;使用花括号初始化: vector&lt;int&gt; v{10}; 表示列表初始化(list initialize).&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;&lt;strong&gt;下标&lt;/strong&gt;使用size_t类型&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;vector&lt;int&gt; v(begin(array), end(array)); 使用数组初始化vector&lt;/p&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+
+&lt;h2&gt;iterator&lt;/h2&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;begin, cbegin , rbegin, rcbegin&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;只要两个迭代器指向同一个容器,就能将它们相减,结果是迭代器之间的距离(类型为difference_type的带符号整数型).&lt;/p&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+
+&lt;h2&gt;array&lt;/h2&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;要理解数组的定义,从内而外阅读.&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;&lt;strong&gt;下标&lt;/strong&gt;使用size_t类型(stddef.h)&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;C++11中引入begin(array)和end(array)来获取数组的特定指针&lt;/p&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+
+&lt;h2&gt;range for&lt;/h2&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;for( auto c : s)&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;for( auto &amp;amp;c : s)&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;处理多维数组&lt;/p&gt;
+
+&lt;blockquote&gt;&lt;p&gt;int arr[row][col];
+for( auto &amp;amp;row : arr){
+  for( auto &amp;amp;c : row){
+  }
+}&lt;/p&gt;&lt;/blockquote&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+</content>
+ </entry>
+ 
+ <entry>
+   <title>C++ Primer -- Chap02</title>
+   <link href="http://carlsama.github.io/c++/2014/04/14/C++-Primer-Chap02-Variable-Basic_type.html"/>
+   <updated>2014-04-14T00:00:00+08:00</updated>
+   <id>http://carlsama.github.io/c++/2014/04/14/C++-Primer-Chap02-Variable-Basic_type</id>
+   <content type="html">&lt;h2&gt;Basic bult-in type&lt;/h2&gt;
+
+&lt;h3&gt;arithmetic type&lt;/h3&gt;
+
+&lt;h4&gt;itergral type&lt;/h4&gt;
+
+&lt;blockquote&gt;&lt;p&gt;Attention !
+字符型有三种: char, signed char, unsigned char.类型char会表现为signed还是unsigned,由编译器决定.&lt;/p&gt;&lt;/blockquote&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;浮点 &lt;-&gt; 整形, 截断或补0&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;给无符号类型超出范围的值,结果是初始值对无符号类型&lt;strong&gt;总数&lt;/strong&gt;取模.&lt;/p&gt;
+
+&lt;blockquote&gt;&lt;p&gt;-1 -&gt; unsigned char == (11...1) % (256) == 255&lt;/p&gt;&lt;/blockquote&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;给带符号类型超出范围的值,结果未定义(undefined).&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;无符号与有符号运算是,会先转换为无符号类型.&lt;/p&gt;
+
+&lt;blockquote&gt;&lt;p&gt;无符号 - 有符号 的结果永远不会为负数!
+unsigned - unsigned 必定为正数
+警惕unsigned用于for循环&lt;/p&gt;&lt;/blockquote&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+
+&lt;h4&gt;float type&lt;/h4&gt;
+
+&lt;h3&gt;void *&lt;/h3&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://github.com/ThreeCobblers/Paladin/blob/master/blog/C%2B%2B/chap2.md&quot;&gt;there is an good example, good job&lt;/a&gt;&lt;/p&gt;
+
+&lt;h3&gt;字面值常亮的前缀/后缀&lt;/h3&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://github.com/ThreeCobblers/Paladin/blob/master/blog/C%2B%2B/chap2.md&quot;&gt;See Page 37 in Primer or here&lt;/a&gt;&lt;/p&gt;
+
+&lt;h2&gt;Compound type&lt;/h2&gt;
+
+&lt;p&gt;复合类型指基于其他类型的类型.&lt;/p&gt;
+
+&lt;h3&gt;Reference&lt;/h3&gt;
+
+&lt;p&gt;引用类型&lt;strong&gt;不是对象&lt;/strong&gt;,是某个对象的别名,必须被初始化且不可重新绑定.程序将引用和&lt;strong&gt;对象&lt;/strong&gt;bind在一起,而非拷贝.&lt;/p&gt;
+
+&lt;blockquote&gt;&lt;p&gt;int &amp;amp;ref = i;
+ref = j; // 赋值
+C++11引入了 右值引用(rvalue reference)&lt;/p&gt;&lt;/blockquote&gt;
+
+&lt;h3&gt;Pointer&lt;/h3&gt;
+
+&lt;p&gt;在C++11中可以利用nullptr来判断空指针.&lt;/p&gt;
+
+&lt;blockquote&gt;&lt;p&gt;int *&amp;amp;p = ptr; // p为指针ptr的引用(面对指针或引用的声明语句时,从右往左阅读)&lt;/p&gt;&lt;/blockquote&gt;
+
+&lt;h2&gt;Variable&lt;/h2&gt;
+
+&lt;h3&gt;对象的初始化&lt;/h3&gt;
+
+&lt;p&gt;对象(object),通常指一块存储数据并具有某种类型的&lt;strong&gt;内存空间&lt;/strong&gt;.&lt;/p&gt;
+
+&lt;p&gt;在C++中,初始化不是赋值,初始化的含义是创建变量时赋予一个初始值,而赋值的含义是把对象的当前值擦除,以一个新值代替.&lt;/p&gt;
+
+&lt;h4&gt;默认初始化(default initialized)&lt;/h4&gt;
+
+&lt;p&gt;内置类型变量的默认初始化值由定义的位置决定.&lt;/p&gt;
+
+&lt;blockquote&gt;&lt;p&gt;定义于函数外部的变量初始化为0;
+定义于函数内部的变量将未被初始化(uninitialized);&lt;/p&gt;&lt;/blockquote&gt;
+
+&lt;h4&gt;列表初始化&lt;/h4&gt;
+
+&lt;p&gt;作为C++11新标准的一部分,用花括号来初始化变量得到了广泛的应用.(list initialization)列表初始化.&lt;/p&gt;
+
+&lt;p&gt;对于内置类型,如果我们使用列表初始化且初始值存在丢失信息的风险,则编译将报错.&lt;/p&gt;
+
+&lt;blockquote&gt;&lt;p&gt;long double ld = 3.1415926
+int a{ld} ;//Wrong
+ing c(ld), d = ld; //Pass
+直接使用literal赋值,Wrong&lt;/p&gt;&lt;/blockquote&gt;
+
+&lt;h3&gt;声明与定义&lt;/h3&gt;
+
+&lt;p&gt;&lt;strong&gt;分离式编译(separate compliation)&lt;/strong&gt;允许将程序分割为若干文件,每个文件可被独立编译.&lt;/p&gt;
+
+&lt;p&gt;为了支持分离式编译,C++将声明和定义区分.声明(declaration)使得&lt;strong&gt;名字对程序所知&lt;/strong&gt;,一个文件如果要使用别处定义的名字则需要包含名字的声明;定义(definition)负责创建与名字关联的实体.&lt;/p&gt;
+
+&lt;p&gt;声明与定义都规定了变量的类型和名字;此外,定义申请空间,同时赋以初值.&lt;/p&gt;
+
+&lt;blockquote&gt;&lt;p&gt;&lt;strong&gt;extern&lt;/strong&gt; int i; //声明而非定义(显式初始化会抵消extern的作用)&lt;/p&gt;&lt;/blockquote&gt;
+
+&lt;p&gt;C++是静态类型(staticlly typed)语言,代表其在&lt;strong&gt;编译阶段&lt;/strong&gt;检查类型.&lt;/p&gt;
+
+&lt;h3&gt;const&lt;/h3&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;就像reference一样,const对象一旦创建就无法改变,所以const对象必须初始化.&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;编译器在编译的过程中,会将const量替换到对应的地方.(就像define).为了执行替换,编译器必须知道常量的值,如果程序包含多个文件,则每个用到const对象的地方必须能放对其访问.&lt;/p&gt;
+
+&lt;blockquote&gt;&lt;p&gt;如果不使用extern,则这些文件中都要对它有定义.默认情况下,&lt;strong&gt;const对象被设置为仅在当前文件中有效&lt;/strong&gt;.
+如果要在多个文件中共享const量,则在&lt;strong&gt;定义和声明时都指定extern&lt;/strong&gt;.&lt;/p&gt;&lt;/blockquote&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;在初始化常量表达式时允许使用任意表达式作为初值.&lt;/p&gt;
+
+&lt;blockquote&gt;&lt;p&gt;const int &amp;amp;r = 10 * i; //OK,不会借助于r来修改.
+int &amp;amp;t = 10 * i; // Wrong,实际上t被binding到了临时变量,当然无法通过t来修改值,所以违法.&lt;/p&gt;&lt;/blockquote&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;const 与 pointer&lt;/p&gt;
+
+&lt;blockquote&gt;&lt;p&gt;const int * 与 int const * 都是 指向常量的指针(pointer to const)
+int * const 为 常量指针(const pointer)&lt;/p&gt;&lt;/blockquote&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;顶层const(top-level const)表示对象本身是常量;底层const(low-level const)则与指针和引用等复合类型的基本类型部分有关.&lt;/p&gt;
+
+&lt;blockquote&gt;&lt;p&gt;类型转换和用作函数参数时,顶层const会被忽略.
+类型转换时,普通指针-&gt;const;但是,const-&gt;普通有限制.
+const_cast只能改变对象的底层const(能将对象做出区分的底层const...)&lt;/p&gt;&lt;/blockquote&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;const成员函数可以修改mutable对象的值&lt;/p&gt;
+
+&lt;blockquote&gt;&lt;p&gt;存在基于const的函数重载:this指针的类型不同&lt;/p&gt;&lt;/blockquote&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+
+&lt;h4&gt;constexpr&lt;/h4&gt;
+
+&lt;p&gt;常量表达式(const expression)是指不会改变并且在编译中能得到计算结果的表达式.复杂系统中,很难分辨一个初始值是不是常量表达式.在C++11中,允许将变量生命为constexpr,由编译器决定是否为常量表达式.&lt;/p&gt;
+
+&lt;blockquote&gt;&lt;p&gt;constexpr int sz = size(); //只有size是constexpr函数时才正确&lt;/p&gt;&lt;/blockquote&gt;
+
+&lt;p&gt;声明constexpr时用到的类型必须为字面值类型(literal type): 算数类型,引用和指针.&lt;/p&gt;
+
+&lt;blockquote&gt;&lt;p&gt;指针的初始值必须为0或者内存中固定(函数体外部或这内部static)
+constexpr 仅能对对指针对象本身有效.&lt;/p&gt;&lt;/blockquote&gt;
+
+&lt;p&gt;constexpr函数是指能用于常量表达式的函数.&lt;/p&gt;
+
+&lt;blockquote&gt;&lt;p&gt;要遵循约定: 函数的返回类型及所有形参类型都时literal类型, 且只有一条return语句.
+可以包含其他语句,只要不进行任何操作 :(&lt;/p&gt;&lt;/blockquote&gt;
+
+&lt;h3&gt;类型别名(type alias)&lt;/h3&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;typedef&lt;/p&gt;
+
+&lt;blockquote&gt;&lt;p&gt;typedef char * cptr;&lt;/p&gt;&lt;/blockquote&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;C++11中,using&lt;/p&gt;
+
+&lt;blockquote&gt;&lt;p&gt;using SI = sales_item;&lt;/p&gt;&lt;/blockquote&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+
+&lt;h3&gt;auto&lt;/h3&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;auto定义的变量必须有初始值.&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;auto推断时一般会忽略top-level const,保留low-level const.&lt;/p&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+
+&lt;h3&gt;decltype&lt;/h3&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;它可以返回操作数的数据类型.&lt;/p&gt;
+
+&lt;blockquote&gt;&lt;p&gt;decltype(f()) i = 10; // f()的返回值类型&lt;/p&gt;&lt;/blockquote&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;与auto不同的是,decltype 返回的变量类型包括 &lt;strong&gt;顶层const和引用&lt;/strong&gt;.&lt;/p&gt;
+
+&lt;blockquote&gt;&lt;p&gt;如果表达式是解印用类型,则返回&lt;strong&gt;引用&lt;/strong&gt;类型
+decltype(*p) ; // 错误,引用类型为初始化&lt;/p&gt;&lt;/blockquote&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;与auto的另一个不同是,双层括号的结果永远是引用&lt;/p&gt;
+
+&lt;blockquote&gt;&lt;p&gt;decltype((p)) ; //Wrong&lt;/p&gt;&lt;/blockquote&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+
+&lt;h2&gt;Basic&lt;/h2&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;可寻址的最小内存块 -&gt; 字节(byte)&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;存储的基本单元 -&gt; 字(word)&lt;/p&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+</content>
+ </entry>
+ 
+ <entry>
+   <title>C++ Primer -- Chap01</title>
+   <link href="http://carlsama.github.io/c++/2014/04/14/C++-Primer-Chap01.html"/>
+   <updated>2014-04-14T00:00:00+08:00</updated>
+   <id>http://carlsama.github.io/c++/2014/04/14/C++-Primer-Chap01</id>
+   <content type="html">&lt;h2&gt;Function Defination&lt;/h2&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-c--&quot; data-lang=&quot;c++&quot;&gt;return_type function_name(parameter_list) left_curly_brace
+
+        function body -&amp;gt; block scope
+
+    right_curly_brace&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;h2&gt;Type&lt;/h2&gt;
+
+&lt;p&gt;类型定义了数据元素的内容,以及这种数据上可以进行的操作.&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;int -&gt; built-in type&lt;/li&gt;
+&lt;/ul&gt;
+
+
+&lt;h2&gt;Develop&lt;/h2&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Preprocessor&lt;/li&gt;
+&lt;li&gt;Compiler&lt;/li&gt;
+&lt;li&gt;Assembler&lt;/li&gt;
+&lt;li&gt;Linker&lt;/li&gt;
+&lt;/ul&gt;
+
+
+&lt;h2&gt;IO&lt;/h2&gt;
+
+&lt;p&gt;一个流是一个字符序列,是从IO设备顺序读出/写入.&lt;/p&gt;
+
+&lt;p&gt;流(stream)代表随着时间的推移,字符是&lt;strong&gt;顺序&lt;/strong&gt;生成或消耗的.&lt;/p&gt;
+
+&lt;p&gt;IO设备将数据保存在buffer中,可以使用endl显示的刷新;读cin会刷新cout;程序非正常终止会刷新cout.&lt;/p&gt;
+
+&lt;h3&gt;IO对象&lt;/h3&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;cin&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;cout&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;cerr (标准错误)输出警告和错误信息 -&gt; 标准错误流
+写到cerr的数据是不存储到buffer的.&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;clog 输出运行时一般信息 -&gt; 标准错误流
+默认情况下,clog数据存入buffer(?).&lt;/p&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+
+&lt;p&gt;&lt;a href=&quot;https://github.com/ThreeCobblers/Paladin/blob/master/blog/C%2B%2B/chap1.md&quot;&gt;Here is an smart example&lt;/a&gt;&lt;/p&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-c--&quot; data-lang=&quot;c++&quot;&gt;int main(){
+    cout&amp;lt;&amp;lt;2;
+    clog&amp;lt;&amp;lt;&amp;quot;clog&amp;quot;;//Seems clog is un-bufferd ?
+    cout&amp;lt;&amp;lt;1;
+    cerr&amp;lt;&amp;lt;&amp;quot;cerror&amp;quot;;//Now std-cout-stream would be refresh ! when using endl here, clog wouldn&amp;#39;t be printed
+    clog&amp;lt;&amp;lt;&amp;quot;clog&amp;quot;;
+    return 0;
+}&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;&amp;lt;&amp;lt; operator 接受两个运算对象:左侧运算对象是一个ostream对象,右侧的运算对象时要打印的值.返回左侧的运算对象(可以连用 &amp;lt;&amp;lt;).&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&quot;this is a string&quot; -&gt; string literal&lt;/li&gt;
+&lt;/ul&gt;
+
+
+&lt;h3&gt;读取输入数量不定的数据:&lt;/h3&gt;
+
+&lt;pre&gt;&lt;code&gt;while(std::cin &amp;gt;&amp;gt; value){
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;输入运算符返回其左侧对象,既std::cin.当我们使用一个istream对象作为条件时,其效果是检测流的状态.&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;流是有效的,成功.&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;遇到eof,或者一个无效的输入时,istream对象的状态变为无效.处于无效状态的istream对象会使条件变为假.&lt;/p&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+
+&lt;h2&gt;while&lt;/h2&gt;
+
+&lt;pre&gt;&lt;code&gt;while ( condition )
+    statement
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2&gt;for&lt;/h2&gt;
+
+&lt;pre&gt;&lt;code&gt;for ( init-statement ; condition ; expression )
+    statement
+&lt;/code&gt;&lt;/pre&gt;
+</content>
+ </entry>
+ 
  
 </feed>
