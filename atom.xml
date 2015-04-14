@@ -4,7 +4,7 @@
  <title>Clint Wu's Blog</title>
  <link href="http://carlsama.github.io/atom.xml" rel="self"/>
  <link href="http://carlsama.github.io"/>
- <updated>2015-04-14T14:09:07+08:00</updated>
+ <updated>2015-04-14T14:50:00+08:00</updated>
  <id>http://carlsama.github.io</id>
  <author>
    <name></name>
@@ -14,9 +14,9 @@
  
  <entry>
    <title>C++ Primer -- Chap019</title>
-   <link href="http://carlsama.github.io/c++/2014/04/14/C++-Primer-Chap19-Special_Tech.html"/>
-   <updated>2014-04-14T00:00:00+08:00</updated>
-   <id>http://carlsama.github.io/c++/2014/04/14/C++-Primer-Chap19-Special_Tech</id>
+   <link href="http://carlsama.github.io/c++/2015/04/14/C++-Primer-Chap19-Special_Tech.html"/>
+   <updated>2015-04-14T00:00:00+08:00</updated>
+   <id>http://carlsama.github.io/c++/2015/04/14/C++-Primer-Chap19-Special_Tech</id>
    <content type="html">&lt;h1&gt;#&lt;/h1&gt;
 
 &lt;p&gt;new表达式执行的过程:
@@ -32,9 +32,9 @@
  
  <entry>
    <title>C++ Primer -- Chap014</title>
-   <link href="http://carlsama.github.io/c++/2014/04/14/C++-Primer-Chap14-Overlaod_Cast.html"/>
-   <updated>2014-04-14T00:00:00+08:00</updated>
-   <id>http://carlsama.github.io/c++/2014/04/14/C++-Primer-Chap14-Overlaod_Cast</id>
+   <link href="http://carlsama.github.io/c++/2015/04/14/C++-Primer-Chap14-Overlaod_Cast.html"/>
+   <updated>2015-04-14T00:00:00+08:00</updated>
+   <id>http://carlsama.github.io/c++/2015/04/14/C++-Primer-Chap14-Overlaod_Cast</id>
    <content type="html">&lt;h2&gt;&lt;/h2&gt;
 
 &lt;h3&gt;与原函数的不同&lt;/h3&gt;
@@ -124,9 +124,9 @@ operator sym(b) 普通函数&lt;/p&gt;&lt;/blockquote&gt;
  
  <entry>
    <title>C++ Primer -- Chap013</title>
-   <link href="http://carlsama.github.io/c++/2014/04/14/C++-Primer-Chap13-Copy_Control.html"/>
-   <updated>2014-04-14T00:00:00+08:00</updated>
-   <id>http://carlsama.github.io/c++/2014/04/14/C++-Primer-Chap13-Copy_Control</id>
+   <link href="http://carlsama.github.io/c++/2015/04/14/C++-Primer-Chap13-Copy_Control.html"/>
+   <updated>2015-04-14T00:00:00+08:00</updated>
+   <id>http://carlsama.github.io/c++/2015/04/14/C++-Primer-Chap13-Copy_Control</id>
    <content type="html">&lt;h2&gt;copy-cons(构造)&lt;/h2&gt;
 
 &lt;p&gt;拷贝控制函数不为explicit&lt;/p&gt;
@@ -220,9 +220,9 @@ Base&amp;amp; operator = (const Base&amp;amp;) &lt;strong&gt;= delete&lt;/strong
  
  <entry>
    <title>C++ Primer -- Chap12</title>
-   <link href="http://carlsama.github.io/c++/2014/04/14/C++-Primer-Chap12-Memory.html"/>
-   <updated>2014-04-14T00:00:00+08:00</updated>
-   <id>http://carlsama.github.io/c++/2014/04/14/C++-Primer-Chap12-Memory</id>
+   <link href="http://carlsama.github.io/c++/2015/04/14/C++-Primer-Chap12-Memory.html"/>
+   <updated>2015-04-14T00:00:00+08:00</updated>
+   <id>http://carlsama.github.io/c++/2015/04/14/C++-Primer-Chap12-Memory</id>
    <content type="html">&lt;h2&gt;智能指针&lt;/h2&gt;
 
 &lt;p&gt;位于memory头文件中.(使用前检查)&lt;/p&gt;
@@ -241,9 +241,9 @@ u.reset(nullptr) 重指向&lt;/p&gt;&lt;/blockquote&gt;
  
  <entry>
    <title>C++ Primer -- Chap10</title>
-   <link href="http://carlsama.github.io/c++/2014/04/14/C++-Primer-Chap10-Generic_Algorithm.html"/>
-   <updated>2014-04-14T00:00:00+08:00</updated>
-   <id>http://carlsama.github.io/c++/2014/04/14/C++-Primer-Chap10-Generic_Algorithm</id>
+   <link href="http://carlsama.github.io/c++/2015/04/14/C++-Primer-Chap10-Generic_Algorithm.html"/>
+   <updated>2015-04-14T00:00:00+08:00</updated>
+   <id>http://carlsama.github.io/c++/2015/04/14/C++-Primer-Chap10-Generic_Algorithm</id>
    <content type="html">&lt;h2&gt;只读算法&lt;/h2&gt;
 
 &lt;p&gt;accumulate(begin,end,base)&lt;/p&gt;
@@ -254,9 +254,9 @@ u.reset(nullptr) 重指向&lt;/p&gt;&lt;/blockquote&gt;
  
  <entry>
    <title>C++ Primer -- Chap09</title>
-   <link href="http://carlsama.github.io/c++/2014/04/14/C++-Primer-Chap09-Sequential_Container.html"/>
-   <updated>2014-04-14T00:00:00+08:00</updated>
-   <id>http://carlsama.github.io/c++/2014/04/14/C++-Primer-Chap09-Sequential_Container</id>
+   <link href="http://carlsama.github.io/c++/2015/04/14/C++-Primer-Chap09-Sequential_Container.html"/>
+   <updated>2015-04-14T00:00:00+08:00</updated>
+   <id>http://carlsama.github.io/c++/2015/04/14/C++-Primer-Chap09-Sequential_Container</id>
    <content type="html">&lt;h2&gt;&lt;/h2&gt;
 
 &lt;p&gt;由于移动构造函数,新标准库的容器性能优于旧的.&lt;/p&gt;
@@ -292,9 +292,9 @@ forward_list&lt;/p&gt;
  
  <entry>
    <title>C++ Primer -- Chap08</title>
-   <link href="http://carlsama.github.io/c++/2014/04/14/C++-Primer-Chap08-IO.html"/>
-   <updated>2014-04-14T00:00:00+08:00</updated>
-   <id>http://carlsama.github.io/c++/2014/04/14/C++-Primer-Chap08-IO</id>
+   <link href="http://carlsama.github.io/c++/2015/04/14/C++-Primer-Chap08-IO.html"/>
+   <updated>2015-04-14T00:00:00+08:00</updated>
+   <id>http://carlsama.github.io/c++/2015/04/14/C++-Primer-Chap08-IO</id>
    <content type="html">&lt;h1&gt;IO class&lt;/h1&gt;
 
 &lt;ul&gt;
@@ -373,9 +373,9 @@ cout&amp;lt;&amp;lt;nounitbuf&lt;/p&gt;&lt;/blockquote&gt;&lt;/li&gt;
  
  <entry>
    <title>C++ Primer -- Chap07</title>
-   <link href="http://carlsama.github.io/c++/2014/04/14/C++-Primer-Chap07-Class.html"/>
-   <updated>2014-04-14T00:00:00+08:00</updated>
-   <id>http://carlsama.github.io/c++/2014/04/14/C++-Primer-Chap07-Class</id>
+   <link href="http://carlsama.github.io/c++/2015/04/14/C++-Primer-Chap07-Class.html"/>
+   <updated>2015-04-14T00:00:00+08:00</updated>
+   <id>http://carlsama.github.io/c++/2015/04/14/C++-Primer-Chap07-Class</id>
    <content type="html">&lt;h1&gt;类&lt;/h1&gt;
 
 &lt;p&gt;类的基本思想是data abstraction和encapsulation.&lt;/p&gt;
@@ -508,9 +508,9 @@ Bar mem; NO&lt;/p&gt;&lt;/blockquote&gt;
  
  <entry>
    <title>C++ Primer -- Chap06</title>
-   <link href="http://carlsama.github.io/c++/2014/04/14/C++-Primer-Chap06-Function.html"/>
-   <updated>2014-04-14T00:00:00+08:00</updated>
-   <id>http://carlsama.github.io/c++/2014/04/14/C++-Primer-Chap06-Function</id>
+   <link href="http://carlsama.github.io/c++/2015/04/14/C++-Primer-Chap06-Function.html"/>
+   <updated>2015-04-14T00:00:00+08:00</updated>
+   <id>http://carlsama.github.io/c++/2015/04/14/C++-Primer-Chap06-Function</id>
    <content type="html">&lt;h2&gt;parameter&lt;/h2&gt;
 
 &lt;h3&gt;数组形参&lt;/h3&gt;
@@ -559,11 +559,11 @@ Bar mem; NO&lt;/p&gt;&lt;/blockquote&gt;
  
  <entry>
    <title>C++ Primer Chap05 Statement</title>
-   <link href="http://carlsama.github.io/2014/04/14/C++-Primer-Chap05-Statement.html"/>
-   <updated>2014-04-14T00:00:00+08:00</updated>
-   <id>http://carlsama.github.io/2014/04/14/C++-Primer-Chap05-Statement</id>
+   <link href="http://carlsama.github.io/2015/04/14/C++-Primer-Chap05-Statement.html"/>
+   <updated>2015-04-14T00:00:00+08:00</updated>
+   <id>http://carlsama.github.io/2015/04/14/C++-Primer-Chap05-Statement</id>
    <content type="html">&lt;p&gt;---                                                                                 layout : post
-time : 2014-4-14
+time : 2015-4-14
 title : C++ Primer -- Chap05
 category : C++
 keywrods : C++, C++ Primer
@@ -604,11 +604,11 @@ tags : C++&lt;/p&gt;
  
  <entry>
    <title>C++ Primer Chap04 Expression</title>
-   <link href="http://carlsama.github.io/2014/04/14/C++-Primer-Chap04-Expression.html"/>
-   <updated>2014-04-14T00:00:00+08:00</updated>
-   <id>http://carlsama.github.io/2014/04/14/C++-Primer-Chap04-Expression</id>
+   <link href="http://carlsama.github.io/2015/04/14/C++-Primer-Chap04-Expression.html"/>
+   <updated>2015-04-14T00:00:00+08:00</updated>
+   <id>http://carlsama.github.io/2015/04/14/C++-Primer-Chap04-Expression</id>
    <content type="html">&lt;p&gt;---                                                                                 layout : post
-time : 2014-4-14
+time : 2015-4-14
 title : C++ Primer -- Chap04
 category : C++
 keywrods : C++, C++ Primer
@@ -712,10 +712,10 @@ dynamic_cast结果为0&lt;/p&gt;&lt;/blockquote&gt;&lt;/li&gt;
 去除const和volatile属性.type-id要为指针，引用．
 可以去除底层const&lt;/p&gt;
 
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-c--&quot; data-lang=&quot;c++&quot;&gt;int j = 10;
-const int * ptr = &amp;amp;j;
-(*(const_cast&amp;lt;int*&amp;gt;(i))) = 0;
-cout&amp;lt;&amp;lt;j&amp;lt;&amp;lt;endl; // 0&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-c--&quot; data-lang=&quot;c++&quot;&gt;&lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;j&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;10&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;const&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;*&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;ptr&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;amp;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;j&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;*&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;const_cast&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;*&amp;gt;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;i&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)))&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;cout&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;j&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;endl&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;// 0&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
 
 
@@ -724,9 +724,9 @@ cout&amp;lt;&amp;lt;j&amp;lt;&amp;lt;endl; // 0&lt;/code&gt;&lt;/pre&gt;&lt;/div
  
  <entry>
    <title>C++ Primer -- Chap03</title>
-   <link href="http://carlsama.github.io/c++/2014/04/14/C++-Primer-Chap03-String-Vector-Array.html"/>
-   <updated>2014-04-14T00:00:00+08:00</updated>
-   <id>http://carlsama.github.io/c++/2014/04/14/C++-Primer-Chap03-String-Vector-Array</id>
+   <link href="http://carlsama.github.io/c++/2015/04/14/C++-Primer-Chap03-String-Vector-Array.html"/>
+   <updated>2015-04-14T00:00:00+08:00</updated>
+   <id>http://carlsama.github.io/c++/2015/04/14/C++-Primer-Chap03-String-Vector-Array</id>
    <content type="html">&lt;h2&gt;namespace&lt;/h2&gt;
 
 &lt;p&gt;&lt;a href=&quot;https://github.com/ThreeCobblers/Paladin/blob/master/blog/C%2B%2B/sosohu/chap3.md&quot;&gt;About how to using namespace&lt;/a&gt;&lt;/p&gt;
@@ -791,9 +791,9 @@ for( auto &amp;amp;row : arr){
  
  <entry>
    <title>C++ Primer -- Chap02</title>
-   <link href="http://carlsama.github.io/c++/2014/04/14/C++-Primer-Chap02-Variable-Basic_type.html"/>
-   <updated>2014-04-14T00:00:00+08:00</updated>
-   <id>http://carlsama.github.io/c++/2014/04/14/C++-Primer-Chap02-Variable-Basic_type</id>
+   <link href="http://carlsama.github.io/c++/2015/04/14/C++-Primer-Chap02-Variable-Basic_type.html"/>
+   <updated>2015-04-14T00:00:00+08:00</updated>
+   <id>http://carlsama.github.io/c++/2015/04/14/C++-Primer-Chap02-Variable-Basic_type</id>
    <content type="html">&lt;h2&gt;Basic bult-in type&lt;/h2&gt;
 
 &lt;h3&gt;arithmetic type&lt;/h3&gt;
@@ -974,16 +974,16 @@ decltype(*p) ; // 错误,引用类型为初始化&lt;/p&gt;&lt;/blockquote&gt;&l
  
  <entry>
    <title>C++ Primer -- Chap01</title>
-   <link href="http://carlsama.github.io/c++/2014/04/14/C++-Primer-Chap01.html"/>
-   <updated>2014-04-14T00:00:00+08:00</updated>
-   <id>http://carlsama.github.io/c++/2014/04/14/C++-Primer-Chap01</id>
+   <link href="http://carlsama.github.io/c++/2015/04/14/C++-Primer-Chap01.html"/>
+   <updated>2015-04-14T00:00:00+08:00</updated>
+   <id>http://carlsama.github.io/c++/2015/04/14/C++-Primer-Chap01</id>
    <content type="html">&lt;h2&gt;Function Defination&lt;/h2&gt;
 
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-c--&quot; data-lang=&quot;c++&quot;&gt;return_type function_name(parameter_list) left_curly_brace
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-c--&quot; data-lang=&quot;c++&quot;&gt;&lt;span class=&quot;n&quot;&gt;return_type&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;function_name&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;parameter_list&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;left_curly_brace&lt;/span&gt;
 
-        function body -&amp;gt; block scope
+        &lt;span class=&quot;n&quot;&gt;function&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;body&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;block&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;scope&lt;/span&gt;
 
-    right_curly_brace&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+    &lt;span class=&quot;n&quot;&gt;right_curly_brace&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
 
 &lt;h2&gt;Type&lt;/h2&gt;
@@ -1027,14 +1027,14 @@ decltype(*p) ; // 错误,引用类型为初始化&lt;/p&gt;&lt;/blockquote&gt;&l
 
 &lt;p&gt;&lt;a href=&quot;https://github.com/ThreeCobblers/Paladin/blob/master/blog/C%2B%2B/chap1.md&quot;&gt;Here is an smart example&lt;/a&gt;&lt;/p&gt;
 
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-c--&quot; data-lang=&quot;c++&quot;&gt;int main(){
-    cout&amp;lt;&amp;lt;2;
-    clog&amp;lt;&amp;lt;&amp;quot;clog&amp;quot;;//Seems clog is un-bufferd ?
-    cout&amp;lt;&amp;lt;1;
-    cerr&amp;lt;&amp;lt;&amp;quot;cerror&amp;quot;;//Now std-cout-stream would be refresh ! when using endl here, clog wouldn&amp;#39;t be printed
-    clog&amp;lt;&amp;lt;&amp;quot;clog&amp;quot;;
-    return 0;
-}&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-c--&quot; data-lang=&quot;c++&quot;&gt;&lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;main&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(){&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;cout&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;clog&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;clog&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;&lt;span class=&quot;c1&quot;&gt;//Seems clog is un-bufferd ?&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;cout&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;cerr&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;cerror&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;&lt;span class=&quot;c1&quot;&gt;//Now std-cout-stream would be refresh ! when using endl here, clog wouldn&amp;#39;t be printed&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;clog&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;clog&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
 
 &lt;p&gt;&amp;lt;&amp;lt; operator 接受两个运算对象:左侧运算对象是一个ostream对象,右侧的运算对象时要打印的值.返回左侧的运算对象(可以连用 &amp;lt;&amp;lt;).&lt;/p&gt;
