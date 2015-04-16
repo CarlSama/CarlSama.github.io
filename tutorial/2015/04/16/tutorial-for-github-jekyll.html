@@ -3,8 +3,8 @@
 <html lang="en">
   <head>
     <meta charset="utf-8">
-    <title>C++ Primer -- Chap12 | Clint Wu's Blog</title>
-    <meta name="description" content="my reading notes about C++ Primer chap 12">
+    <title>在去往GitHub & Jekyll的路上 | Clint Wu's Blog</title>
+    <meta name="description" content="我在使用GitHub和Jekyll搭建个人博客时遇到的问题">
     <meta name="author" content="Clint Wu">
     <meta name="keywords" content="">
 
@@ -50,29 +50,130 @@
       <div class="content">
         
 <div class="page-header">
-  <h1>C++ Primer -- Chap12 <small class="H1_Date">--14 April 2015</small></h1>
+  <h1>在去往GitHub & Jekyll的路上 <small class="H1_Date">--16 April 2015</small></h1>
 </div>
 
 <div class="row">
   <div class="span8">
-    <h2>智能指针</h2>
+    <h2>前言</h2>
 
-<p>位于memory头文件中.(使用前检查)</p>
+<p>刚刚几分钟之前,终于成功完整的搭建了自己的第一个个人博客.其实昨天下午就已经差不多搭建完成,可以一致卡在了一个问题上,到时我花费了很多的时间来测试,修正.</p>
 
-<p>shared_ptr在无用之后仍然存在的情况:</p>
+<p>现在我把自己在配置github + jekylly过程中遇到的问题写下来,希望对他人有所帮助.
+</br></br></p>
 
-<blockquote><p>将shared_ptr存储在容器中,最后应该earse删除,否则不会自动释放</p></blockquote>
+<h2>环境准备</h2>
 
-<p>unique_ptr</p>
+<p>关于github + jekyll的软件需求,<a href="http://sosohu.github.io/experience/2015/02/06/Github-Jekyll-Markdown%E5%BC%80%E5%90%AF%E5%86%99%E4%BD%9C%E6%96%B0%E6%97%B6%E4%BB%A3.html">sosohu</a>这篇文章已经有所介绍.在此不加赘述.</p>
 
-<blockquote><p>u.release() 放弃指向
-u.reset() 释放
-u.reset(nullptr) 重指向</p></blockquote>
+<p>不过给大家一点建议就是,最好能够自己能够到<a href="www.ruby-lang.org/en/">ruby</a>的官网去下载源码包,本地编译安装.
+</br></br></p>
+
+<h2>关于Disqus插件</h2>
+
+<p>在<a href="http://sosohu.github.io/experience/2015/02/06/Github-Jekyll-Markdown%E5%BC%80%E5%90%AF%E5%86%99%E4%BD%9C%E6%96%B0%E6%97%B6%E4%BB%A3.html">sosohu</a>的blog里面对disqus的本地化配置也有所介绍.</p>
+
+<p>在这里要提醒大家的一点时,当在<a href="https://disqus.com">Disqus</a>中注册了账号以后,一定要记得去profile > Edit Profile > Moderation中添加自己的moderator,不然系统会报出"We were unable to load Disqus.."的错误.</p>
+
+<p>此外,在修改.yml文件时,一定要注意的是每个key与后面的':',以及再之后的value之间都应该有空格间隔.例如:</p>
+
+<div class="highlight"><pre><code class="language-c--" data-lang="c++"><span class="nl">key</span> <span class="p">:</span> <span class="n">value</span></code></pre></div>
 
 
-    <!--    143-->
+<p></br></br></p>
+
+<h2>关于cnzz插件</h2>
+
+<p>强烈建议大家去<a href="http://new.cnzz.com/v1/login.php?siteid=1000067280">cnzz</a>注册自己的数据分析账号,并将所有配置文件中相应的字段替换.
+</br></br></p>
+
+<h2>文件目录结构分析</h2>
+
+<p>通过许多测试,初步确定了各个目录的大致功能,分析如下:</p>
+
+<table>
+<thead>
+<tr>
+<th style="text-align:center;"> File Name </th>
+<th style="text-align:center;"> Function </th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center;">404.html     </td>
+<td style="text-align:center;">404 Not found</td>
+</tr>
+<tr>
+<td style="text-align:center;">about.md     </td>
+<td style="text-align:center;">博客页面上栏"About"的生成模板</td>
+</tr>
+<tr>
+<td style="text-align:center;">archive.md   </td>
+<td style="text-align:center;">博客页面上栏"Archive"的生成模板</td>
+</tr>
+<tr>
+<td style="text-align:center;">categories.md</td>
+<td style="text-align:center;">博客页面上栏"Category"的生成模板</td>
+</tr>
+<tr>
+<td style="text-align:center;">config.yml   </td>
+<td style="text-align:center;">用户个性化配置文件</td>
+</tr>
+<tr>
+<td style="text-align:center;">includes/    </td>
+<td style="text-align:center;">博客的主题模板</td>
+</tr>
+<tr>
+<td style="text-align:center;">index.md     </td>
+<td style="text-align:center;">博客主页索引生成模板</td>
+</tr>
+<tr>
+<td style="text-align:center;">layouts/     </td>
+<td style="text-align:center;">博客文章页的生成模板</td>
+</tr>
+<tr>
+<td style="text-align:center;">plugins/     </td>
+<td style="text-align:center;">插件</td>
+</tr>
+<tr>
+<td style="text-align:center;">posts/       </td>
+<td style="text-align:center;">用户存放博客的地方</td>
+</tr>
+<tr>
+<td style="text-align:center;">site/        </td>
+<td style="text-align:center;">用户运行jekyll build .后将_posts/下的MarkDown转换为的Html文件</td>
+</tr>
+</tbody>
+</table>
+
+
+<p></br></p>
+
+<h2>一点建议</h2>
+
+<p>在sosohu的介绍下,我强烈的建议你能够使用两个git branch:</p>
+
+<ol>
+<li><p>master分支做最终的提交使用;</p></li>
+<li><p>source分支做代码编辑与编译.</p></li>
+</ol>
+
+
+<p></br></p>
+
+<h2>最后</h2>
+
+<p>感谢<a href="http://sosohu.github.io/experience/2015/02/06/Github-Jekyll-Markdown%E5%BC%80%E5%90%AF%E5%86%99%E4%BD%9C%E6%96%B0%E6%97%B6%E4%BB%A3.html">sosohu</a>的blog对我的搭建工作提供的帮助.</p>
+
+<p>快来动手搭建自己的blog吧 :)   Have fun
+</br></br></p>
+
+<p><img src="http://carlsama.github.io/assets/image/catoon/death.jpg" alt="img" /></p>
+
+
+    <!--    1006-->
     <div class="eof">-&nbsp;EOF&nbsp;-</div>
-    <p class="declare">声明:本文采用<a href="http://creativecommons.org/licenses/by-nc-sa/3.0/" target="_blank" rel="nofollow" title="署名-非商业性使用-相同方式共享">BY-NC-SA</a>协议进行授权.转载请注明: <a href="/c++/2015/04/14/C++-Primer-Chap12-Memory.html" title="C++ Primer -- Chap12 " rel="nofollow">C++ Primer -- Chap12</a></p>
+    <p class="declare">声明:本文采用<a href="http://creativecommons.org/licenses/by-nc-sa/3.0/" target="_blank" rel="nofollow" title="署名-非商业性使用-相同方式共享">BY-NC-SA</a>协议进行授权.转载请注明: <a href="/tutorial/2015/04/16/tutorial-for-github-jekyll.html" title="在去往GitHub & Jekyll的路上 " rel="nofollow">在去往GitHub & Jekyll的路上</a></p>
     <hr>
 	<!-- bdshare provider -->	
 	<style>
@@ -97,11 +198,11 @@ u.reset(nullptr) 重指向</p></blockquote>
     <div class="pagination">
       <ul>
       
-        <li class="prev"><a href="/c++/2015/04/14/C++-Primer-Chap10-Generic_Algorithm.html" title="C++ Primer -- Chap10">&larr; Previous</a></li>
+        <li class="prev"><a href="/c++/2015/04/14/C++-Primer-Chap19-Special_Tech.html" title="C++ Primer -- Chap019">&larr; Previous</a></li>
       
         <li><a href="/archive.html">Archive</a></li>
       
-        <li class="next"><a href="/c++/2015/04/14/C++-Primer-Chap13-Copy_Control.html" title="C++ Primer -- Chap013">Next &rarr;</a></li>
+        <li class="next disabled"><a>Next &rarr;</a>
       
       </ul>
     </div>
@@ -142,7 +243,7 @@ u.reset(nullptr) 重指向</p></blockquote>
 
   
      
-    	<li><a href="/tags.html#C++-ref">C++ <span>14</span></a></li>
+    	<li><a href="/tags.html#GitHub-ref">GitHub <span>1</span></a></li>
     
   
 
@@ -153,13 +254,13 @@ u.reset(nullptr) 重指向</p></blockquote>
   <h4>相关文章</h4>
   <ul>
   
-  <li><a href="/tutorial/2015/04/16/tutorial-for-github-jekyll.html ">在去往GitHub & Jekyll的路上</a></li>
-  
   <li><a href="/c++/2015/04/14/C++-Primer-Chap19-Special_Tech.html ">C++ Primer -- Chap019</a></li>
   
   <li><a href="/c++/2015/04/14/C++-Primer-Chap14-Overlaod_Cast.html ">C++ Primer -- Chap014</a></li>
   
   <li><a href="/c++/2015/04/14/C++-Primer-Chap13-Copy_Control.html ">C++ Primer -- Chap013</a></li>
+  
+  <li><a href="/c++/2015/04/14/C++-Primer-Chap12-Memory.html ">C++ Primer -- Chap12</a></li>
   
   <li><a href="/c++/2015/04/14/C++-Primer-Chap10-Generic_Algorithm.html ">C++ Primer -- Chap10</a></li>
   
