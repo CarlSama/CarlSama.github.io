@@ -1,0 +1,301 @@
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>C++ Primer -- Chap014 | Clint Wu's Blog</title>
+    <meta name="description" content="my reading notes about C++ Primer chap 14">
+    <meta name="author" content="Clint Wu">
+    <meta name="keywords" content="">
+
+    <!-- Le HTML5 shim, for IE6-8 support of HTML elements -->
+    <!--[if lt IE 9]>
+      <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+
+    <!-- Le styles -->
+    <link href="/assets/themes/flying/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/assets/themes/flying/css/style.css" rel="stylesheet" type="text/css" media="all">
+    <link href="/assets/themes/flying/css/syntax.css" rel="stylesheet" type="text/css" media="all">
+    <script type="text/javascript" src="/assets/themes/flying/js/jquery-1.9.1.min.js"></script>
+   <!-- Le fav and touch icons -->
+  <!-- Update these with your own images
+    <link rel="shortcut icon" href="images/favicon.ico">
+    <link rel="apple-touch-icon" href="images/apple-touch-icon.png">
+    <link rel="apple-touch-icon" sizes="72x72" href="images/apple-touch-icon-72x72.png">
+    <link rel="apple-touch-icon" sizes="114x114" href="images/apple-touch-icon-114x114.png">
+  -->
+</head>
+
+  <body>
+
+    <div class="navbar">
+      <div class="navbar-inner">
+        <div class="container">
+          <a class="brand" href="/">Clint Wu's Blog</a>
+          <ul class="nav">
+		<li><a href="/about.html">About</a></li>
+		<li><a href="/archive.html">Archive</a></li>
+		<li><a href="/categories.html">Categories</a></li>
+<!--		<li><a href="http://wiki.zhouyichu.com">Wiki</a></li>  -->
+		<li class="offset3"><a href="/atom.xml">Subscribe</a></li>
+		<li><a id="random" href="#">Random</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="container">
+
+      <div class="content">
+        
+<div class="page-header">
+  <h1>C++ Primer -- Chap014 <small class="H1_Date">--14 April 2015</small></h1>
+</div>
+
+<div class="row">
+  <div class="span8">
+    <h2></h2>
+
+<h3>与原函数的不同</h3>
+
+<p>运算符的求值顺序无法引用到重载运算符</p>
+
+<blockquote><p>&amp;&amp;和||无法保留短路属性,因此不建议重载
+C++已经定义了.和&amp;运算符用于类类型的特殊含义,一般不重载</p></blockquote>
+
+<h3>成员还是非成员?</h3>
+
+<ol>
+<li><p>=, [], (), ->必须是成员</p></li>
+<li><p>复合运算符一般是成员</p></li>
+<li><p>改变对象状态的运算符或与给定类型密切相关的类型,应为成员</p>
+
+<blockquote><p>++, --, *(解印用)</p></blockquote></li>
+<li><p>具有对称性的运算符(算数,相等性,关系和位运算符等),非成员</p></li>
+</ol>
+
+
+<h3>>> &lt;&lt;</h3>
+
+<p>尽量减少格式化操作</p>
+
+<p>必须是非成员函数</p>
+
+<blockquote><p>否则左侧对象必须时类的对象,这就隐含要求了类是iostream对象.我们不能修改标准库 :(</p></blockquote>
+
+<p>输入运算符(>>)要处理输入失败的情况,负责从错误中恢复.</p>
+
+<blockquote><p>读取错误类型
+eof或其他错误</p></blockquote>
+
+<h3>下标运算符</h3>
+
+<p>通常定义两个版本,根据对象的类型来决定</p>
+
+<blockquote><p>返回普通引用
+返回常量引用</p></blockquote>
+
+<h3>++ --</h3>
+
+<p>前置版本:</p>
+
+<blockquote><p>Base&amp; operator ++/-- ();需要返回对象
+引用是为了符合内置类型</p></blockquote>
+
+<p>后置版本:</p>
+
+<blockquote><p>Base operator ++/-- (int);返回的是之前的值,因为无需用到实参的值,所以不需命名</p></blockquote>
+
+<h3>成员访问运算符</h3>
+
+<h3>调用运算符</h3>
+
+<p>可调用对象-> 定义了调用运算符</p>
+
+<h2>类型转换</h2>
+
+<p>operator type () const;</p>
+
+<p>为了防止类型转换产生意外的结果(cin&lt;&lt;s),c++11引入了显示的类型转换运算符</p>
+
+<blockquote><p>当表达式出现在条件判断的地方,会隐式的执行显式转换</p></blockquote>
+
+<h3>有二义性的类型转换</h3>
+
+<p>不要让两个类执行相同的类型转换
+A中有B为参数的构造函数,而B中有A的类型转换,会带来二义性错误</p>
+
+<blockquote><p>A a = b; 同时存在有两种由B获得A的方法</p></blockquote>
+
+<p>避免转换目标是内置算数类型</p>
+
+<blockquote><p>operator int() const;
+operator double() const;</p></blockquote>
+
+<h3></h3>
+
+<p>a sym b</p>
+
+<blockquote><p>a.operator sym(b) a的成员函数
+operator sym(b) 普通函数</p></blockquote>
+
+
+    <!--    778-->
+    <div class="eof">-&nbsp;EOF&nbsp;-</div>
+    <p class="declare">声明:本文采用<a href="http://creativecommons.org/licenses/by-nc-sa/3.0/" target="_blank" rel="nofollow" title="署名-非商业性使用-相同方式共享">BY-NC-SA</a>协议进行授权.转载请注明: <a href="/c++/2015/04/14/C++-Primer-Chap14-Overlaod_Cast.html" title="C++ Primer -- Chap014 " rel="nofollow">C++ Primer -- Chap014</a></p>
+    <hr>
+	<!-- bdshare provider -->	
+	<style>
+		.bdsharebuttonbox{
+			float:right;
+		}
+	</style>
+	<div class="bdsharebuttonbox">
+		<a href="#" class="bds_tsina" data-cmd="tsina" title="分享到新浪微博"></a>
+		<a href="#" class="bds_tqq" data-cmd="tqq" title="分享到腾讯微博"></a>
+		<a href="#" class="bds_renren" data-cmd="renren" title="分享到人人网"></a>
+		<a href="#" class="bds_weixin" data-cmd="weixin" title="分享到微信"></a>
+		<a href="#" class="bds_more" data-cmd="more"></a>
+	</div>
+	<script>
+		window._bd_share_config={"common":{"bdSnsKey":{},"bdText":"","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"1","bdSize":"24"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];
+	</script>
+	<!--- end bdshare -->
+	<!--- 
+ -->
+	
+    <div class="pagination">
+      <ul>
+      
+        <li class="prev"><a href="/c++/2015/04/14/C++-Primer-Chap13-Copy_Control.html" title="C++ Primer -- Chap013">&larr; Previous</a></li>
+      
+        <li><a href="/archive.html">Archive</a></li>
+      
+        <li class="next"><a href="/c++/2015/04/14/C++-Primer-Chap19-Special_Tech.html" title="C++ Primer -- Chap019">Next &rarr;</a></li>
+      
+      </ul>
+    </div>
+    <hr>
+    
+
+
+      <div id="disqus_thread"></div>
+    <script type="text/javascript">
+        /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
+        var disqus_shortname = 'carlsamagithubio'; // required: replace example with your forum shortname
+
+        /* * * DON'T EDIT BELOW THIS LINE * * */
+        (function() {
+            var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+            dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+        })();
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+    <a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+    
+
+
+
+
+
+  </div>
+  
+  <div class="span4">
+
+  
+    <h4>Tags</h4>
+    <ul class="tag_box">
+    
+    
+
+
+  
+     
+    	<li><a href="/tags.html#C++-ref">C++ <span>14</span></a></li>
+    
+  
+
+
+
+    </ul>
+    
+  <h4>相关文章</h4>
+  <ul>
+  
+  <li><a href="/c++/2015/04/14/C++-Primer-Chap19-Special_Tech.html ">C++ Primer -- Chap019</a></li>
+  
+  <li><a href="/c++/2015/04/14/C++-Primer-Chap13-Copy_Control.html ">C++ Primer -- Chap013</a></li>
+  
+  <li><a href="/c++/2015/04/14/C++-Primer-Chap12-Memory.html ">C++ Primer -- Chap12</a></li>
+  
+  <li><a href="/c++/2015/04/14/C++-Primer-Chap10-Generic_Algorithm.html ">C++ Primer -- Chap10</a></li>
+  
+  <li><a href="/c++/2015/04/14/C++-Primer-Chap09-Sequential_Container.html ">C++ Primer -- Chap09</a></li>
+  
+  <li><a href="/c++/2015/04/14/C++-Primer-Chap08-IO.html ">C++ Primer -- Chap08</a></li>
+  
+  <li><a href="/c++/2015/04/14/C++-Primer-Chap07-Class.html ">C++ Primer -- Chap07</a></li>
+  
+  </ul>
+  </div>
+</div>
+<script type="text/javascript" src="/assets/themes/flying/js/blogscript.js"></script>
+
+
+      </div>
+
+      <footer>
+        <p>&copy; Clint Wu 2012 
+          with help from <a href="http://jekyllbootstrap.com" target="_blank" title="The Definitive Jekyll Blogging Framework">Jekyll Bootstrap</a>
+          and <a href="http://twitter.github.com/bootstrap/" target="_blank">Twitter Bootstrap</a>
+	<script type="text/javascript">var cnzz_protocol = (("https:" == document.location.protocol) ? " https://" : " http://");document.write(unescape("%3Cspan id='cnzz_stat_icon_1000067280'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "s22.cnzz.com/z_stat.php%3Fid%3D1000067280%26show%3Dpic' type='text/javascript'%3E%3C/script%3E"));</script>
+        </p>
+      </footer>
+
+    </div> <!-- /container -->
+
+    
+    
+  </body>
+
+<script type="text/javascript">
+$("a[href^='http://']").each(function(){
+	this.target="_blank";
+
+});
+</script>
+
+  <!--MathJax-->
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+      processEscapes: true
+       }
+  });
+</script>
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        TeX: {equationNumbers: {autoNumber: ["AMS"], useLabelIds: true},extensions: ["autobold.js"]},
+        "HTML-CSS": {linebreaks: {automatic: true}},
+        SVG: {linebreaks: {automatic: true}}
+    });
+</script>
+
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+    });
+</script>
+
+<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+<script type="text/javascript" src="/assets/themes/flying/js/default.js"></script>
+ </html>
+
