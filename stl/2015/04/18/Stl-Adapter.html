@@ -3,8 +3,8 @@
 <html lang="en">
   <head>
     <meta charset="utf-8">
-    <title>C++ Primer -- Chap01 | Clint Wu's Blog</title>
-    <meta name="description" content="my reading notes about C++ Primer chap 1">
+    <title>SGI Stl的Adapter的赏析 | Clint Wu's Blog</title>
+    <meta name="description" content="对SGI Stl中各类适配器的源码分析以及模仿实现">
     <meta name="author" content="Clint Wu">
     <meta name="keywords" content="">
 
@@ -50,108 +50,59 @@
       <div class="content">
         
 <div class="page-header">
-  <h1>C++ Primer -- Chap01 <small class="H1_Date">--14 April 2015</small></h1>
+  <h1>SGI Stl的Adapter的赏析 <small class="H1_Date">--18 April 2015</small></h1>
 </div>
 
 <div class="row">
   <div class="span8">
-    <h2>Function Defination</h2>
+    <h2>前言</h2>
 
-<div class="highlight"><pre><code class="language-c--" data-lang="c++"><span class="n">return_type</span> <span class="n">function_name</span><span class="p">(</span><span class="n">parameter_list</span><span class="p">)</span> <span class="n">left_curly_brace</span>
+<p>上次我们讲到了<strong>Allocator</strong>，今天我们来谈一谈和它同姓的一个小伙伴：<strong>Adapter</strong>．它的中文翻译是<strong>适配器</strong>,通过这个翻译也许你就能猜测到Adapter不会想我们之后会谈到的vector,deque,list....这种直接的容器类型那样，事实上Allocator确实有它特殊之处．我想看完本章之后，你就会更加迫不及待的进入stl个中容器类的背后来一窥究竟．</p>
 
-        <span class="n">function</span> <span class="n">body</span> <span class="o">-&gt;</span> <span class="n">block</span> <span class="n">scope</span>
+<h2>Stack</h2>
 
-    <span class="n">right_curly_brace</span></code></pre></div>
+<p>Stack是一种<strong>first in last out</strong>的数据结构，用户只能在其一端（通常称为top）进行数据的存取．因为它支持的功能相对简单（例如相对与以后要介绍到的big buddy deque而言），所以我们其实不需要额外的去实现一套stack，只需要使用vector，deque．．．的部分功能来实现就可以．</p>
 
-
-<h2>Type</h2>
-
-<p>类型定义了数据元素的内容,以及这种数据上可以进行的操作.</p>
-
-<ul>
-<li>int -> built-in type</li>
-</ul>
-
-
-<h2>Develop</h2>
-
-<ul>
-<li>Preprocessor</li>
-<li>Compiler</li>
-<li>Assembler</li>
-<li>Linker</li>
-</ul>
+<div class="highlight"><pre><code class="language-c--" data-lang="c++"><span class="k">template</span><span class="o">&lt;</span><span class="k">typename</span> <span class="n">Tp</span><span class="p">,</span><span class="k">typename</span> <span class="n">SequenceContainter</span><span class="o">&gt;</span>
+<span class="k">class</span> <span class="nc">stack</span> <span class="p">{</span>
+        <span class="n">SequenceContainter</span> <span class="n">c</span><span class="p">;</span>
+    <span class="k">public</span><span class="o">:</span>
+        <span class="p">......</span>
+        <span class="kt">void</span> <span class="n">push</span><span class="p">(</span><span class="k">const</span> <span class="n">Tp</span><span class="o">&amp;</span> <span class="n">v</span><span class="p">)</span> <span class="p">{</span> <span class="n">c</span><span class="p">.</span><span class="n">push_back</span><span class="p">(</span><span class="n">v</span><span class="p">);</span> <span class="p">}</span>
+        <span class="kt">void</span> <span class="n">pop</span><span class="p">()</span> <span class="p">{</span> <span class="n">c</span><span class="p">.</span><span class="n">pop_back</span><span class="p">();</span> <span class="p">}</span>
+<span class="p">};</span></code></pre></div>
 
 
-<h2>IO</h2>
+<p>上面是stack的大概架构，从中我们不难发现，stack的操作都是通过调用内部的其他顺序容器对象来实现的．这种"用他人之力，来成我之事"的类就被称为<strong>Adatper</strong>.</p>
 
-<p>一个流是一个字符序列,是从IO设备顺序读出/写入.</p>
+<h2>Heap</h2>
 
-<p>流(stream)代表随着时间的推移,字符是<strong>顺序</strong>生成或消耗的.</p>
+<p>Stl中的heap有一点特殊，它并不是存储特定数据的结构，而是依托与其他顺序容器的方法．通过heap中make_heap,push_heap,pop_heap,sort_heap的方法，用户可以对指定顺序容器特定区间内的值做相应调整．我们来具体看一下工作流程．</p>
 
-<p>IO设备将数据保存在buffer中,可以使用endl显示的刷新;读cin会刷新cout;程序非正常终止会刷新cout.</p>
+<h3>make_heap</h3>
 
-<h3>IO对象</h3>
+<p>首先我们来看建堆函数．make_heap的功能是将顺序容器中[begin,end)区间内的值做调整，使得其满足最大堆／最小堆的限制.</p>
 
-<ul>
-<li><p>cin</p></li>
-<li><p>cout</p></li>
-<li><p>cerr (标准错误)输出警告和错误信息 -> 标准错误流
-写到cerr的数据是不存储到buffer的.</p></li>
-<li><p>clog 输出运行时一般信息 -> 标准错误流
-默认情况下,clog数据存入buffer(?).</p></li>
-</ul>
+<p>该方法从堆的倒数第二层中，最右节点idx开始，迭代对[idx -> begin]内全部元素执行<strong>fill_hole_with_child操作. </strong>fill_hole_with_child这个操作能将idx放置到其子树中合适的位置，并且顺带调整其子树．</p>
 
+<h3>push_heap</h3>
 
-<p><a href="https://github.com/ThreeCobblers/Paladin/blob/master/blog/C%2B%2B/chap1.md">Here is an smart example</a></p>
+<p>将需要压入的数据value放置在[begin,end)区间的尾部，然后迭代的调整value与其父节点的位置．</p>
 
-<div class="highlight"><pre><code class="language-c--" data-lang="c++"><span class="kt">int</span> <span class="nf">main</span><span class="p">(){</span>
-    <span class="n">cout</span><span class="o">&lt;&lt;</span><span class="mi">2</span><span class="p">;</span>
-    <span class="n">clog</span><span class="o">&lt;&lt;</span><span class="s">&quot;clog&quot;</span><span class="p">;</span><span class="c1">//Seems clog is un-bufferd ?</span>
-    <span class="n">cout</span><span class="o">&lt;&lt;</span><span class="mi">1</span><span class="p">;</span>
-    <span class="n">cerr</span><span class="o">&lt;&lt;</span><span class="s">&quot;cerror&quot;</span><span class="p">;</span><span class="c1">//Now std-cout-stream would be refresh ! when using endl here, clog wouldn&#39;t be printed</span>
-    <span class="n">clog</span><span class="o">&lt;&lt;</span><span class="s">&quot;clog&quot;</span><span class="p">;</span>
-    <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
-<span class="p">}</span></code></pre></div>
+<h3>pop_heap</h3>
+
+<p>首先记录尾节点的数据value，并将首节点放置在尾节点上．然后将value放置在首节点的位置begin.　</p>
+
+<p>现在我们的任务就是调整[beign,end-1)内数据（想想为什么时end-1,而不是end呢？）．我们可以使用__fill_hole_with_child来填充begin，之后调用push_heap来压入value．</p>
+
+<h3>sort_heap</h3>
+
+<p>迭代的调用pop_heap来获取堆顶元素．</p>
 
 
-<p>&lt;&lt; operator 接受两个运算对象:左侧运算对象是一个ostream对象,右侧的运算对象时要打印的值.返回左侧的运算对象(可以连用 &lt;&lt;).</p>
-
-<ul>
-<li>"this is a string" -> string literal</li>
-</ul>
-
-
-<h3>读取输入数量不定的数据:</h3>
-
-<pre><code>while(std::cin &gt;&gt; value){
-}
-</code></pre>
-
-<p>输入运算符返回其左侧对象,既std::cin.当我们使用一个istream对象作为条件时,其效果是检测流的状态.</p>
-
-<ul>
-<li><p>流是有效的,成功.</p></li>
-<li><p>遇到eof,或者一个无效的输入时,istream对象的状态变为无效.处于无效状态的istream对象会使条件变为假.</p></li>
-</ul>
-
-
-<h2>while</h2>
-
-<pre><code>while ( condition )
-    statement
-</code></pre>
-
-<h2>for</h2>
-
-<pre><code>for ( init-statement ; condition ; expression )
-    statement
-</code></pre>
-
-
-    <!--    1150-->
+    <!--    1232-->
     <div class="eof">-&nbsp;EOF&nbsp;-</div>
-    <p class="declare">声明:本文采用<a href="http://creativecommons.org/licenses/by-nc-sa/3.0/" target="_blank" rel="nofollow" title="署名-非商业性使用-相同方式共享">BY-NC-SA</a>协议进行授权.转载请注明: <a href="/c++/2015/04/14/C++-Primer-Chap01.html" title="C++ Primer -- Chap01 " rel="nofollow">C++ Primer -- Chap01</a></p>
+    <p class="declare">声明:本文采用<a href="http://creativecommons.org/licenses/by-nc-sa/3.0/" target="_blank" rel="nofollow" title="署名-非商业性使用-相同方式共享">BY-NC-SA</a>协议进行授权.转载请注明: <a href="/stl/2015/04/18/Stl-Adapter.html" title="SGI Stl的Adapter的赏析 " rel="nofollow">SGI Stl的Adapter的赏析</a></p>
     <hr>
 	<!-- bdshare provider -->	
 	<style>
@@ -176,11 +127,11 @@
     <div class="pagination">
       <ul>
       
-        <li class="prev disabled"><a>&larr; Previous</a></li>
+        <li class="prev"><a href="/tutorial/2015/04/16/tutorial-for-github-jekyll.html" title="在去往GitHub & Jekyll的路上">&larr; Previous</a></li>
       
         <li><a href="/archive.html">Archive</a></li>
       
-        <li class="next"><a href="/c++/2015/04/14/C++-Primer-Chap02-Variable-Basic_type.html" title="C++ Primer -- Chap02">Next &rarr;</a></li>
+        <li class="next disabled"><a>Next &rarr;</a>
       
       </ul>
     </div>
@@ -221,7 +172,7 @@
 
   
      
-    	<li><a href="/tags.html#C++-ref">C++ <span>14</span></a></li>
+    	<li><a href="/tags.html#Stl-ref">Stl <span>2</span></a></li>
     
   
 
@@ -231,8 +182,6 @@
     
   <h4>相关文章</h4>
   <ul>
-  
-  <li><a href="/stl/2015/04/18/Stl-Adapter.html ">SGI Stl的Adapter的赏析</a></li>
   
   <li><a href="/tutorial/2015/04/16/tutorial-for-github-jekyll.html ">在去往GitHub & Jekyll的路上</a></li>
   
@@ -245,6 +194,8 @@
   <li><a href="/c++/2015/04/14/C++-Primer-Chap13-Copy_Control.html ">C++ Primer -- Chap013</a></li>
   
   <li><a href="/c++/2015/04/14/C++-Primer-Chap12-Memory.html ">C++ Primer -- Chap12</a></li>
+  
+  <li><a href="/c++/2015/04/14/C++-Primer-Chap10-Generic_Algorithm.html ">C++ Primer -- Chap10</a></li>
   
   </ul>
   </div>
