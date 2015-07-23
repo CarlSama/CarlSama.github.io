@@ -1,10 +1,9 @@
----
-layout : post
+---                                                                                 layout : post
 time : 2015-4-14
 title : C++ Primer -- Chap05
 category : C++ 
 keywrods : C++, C++ Primer
-tags : C++
+tags : C++ 
 description : my reading notes about C++ Primer chap 5
 ---
 
