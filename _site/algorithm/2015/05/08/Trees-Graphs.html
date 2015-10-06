@@ -1,0 +1,352 @@
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Trees and Graphs | Clint Wu's Blog</title>
+    <meta name="description" content="Reading note of < Cracking the code interview >">
+    <meta name="author" content="">
+    <meta name="keywords" content="">
+
+    <!-- Le HTML5 shim, for IE6-8 support of HTML elements -->
+    <!--[if lt IE 9]>
+      <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+
+    <!-- Le styles -->
+    <link href="/assets/themes/flying/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/assets/themes/flying/css/style.css" rel="stylesheet" type="text/css" media="all">
+    <link href="/assets/themes/flying/css/syntax.css" rel="stylesheet" type="text/css" media="all">
+    <script type="text/javascript" src="/assets/themes/flying/js/jquery-1.9.1.min.js"></script>
+   <!-- Le fav and touch icons -->
+  <!-- Update these with your own images
+    <link rel="shortcut icon" href="images/favicon.ico">
+    <link rel="apple-touch-icon" href="images/apple-touch-icon.png">
+    <link rel="apple-touch-icon" sizes="72x72" href="images/apple-touch-icon-72x72.png">
+    <link rel="apple-touch-icon" sizes="114x114" href="images/apple-touch-icon-114x114.png">
+  -->
+</head>
+
+  <body>
+
+    <div class="navbar">
+      <div class="navbar-inner">
+        <div class="container">
+          <a class="brand" href="/">Clint Wu's Blog</a>
+          <ul class="nav">
+		<li><a href="/about.html">About</a></li>
+		<li><a href="/archive.html">Archive</a></li>
+		<li><a href="/categories.html">Categories</a></li>
+<!--		<li><a href="http://wiki.zhouyichu.com">Wiki</a></li>  -->
+		<li class="offset3"><a href="/atom.xml">Subscribe</a></li>
+		<li><a id="random" href="#">Random</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="container">
+
+      <div class="content">
+        
+<div class="page-header">
+  <h1>Trees and Graphs <small class="H1_Date">--08 May 2015</small></h1>
+</div>
+
+<div class="row">
+  <div class="span8">
+    <h2>Tree</h2>
+
+<h3>Binary tree is not all binary search tree</h3>
+
+<h3>Traversal algorithm</h3>
+
+<h4>In-order</h4>
+
+<h4>Pre-order</h4>
+
+<h4>Post-order</h4>
+
+<h4>Insert node</h4>
+
+<h4>Balance search tree</h4>
+
+<h4>deletion in search tree</h4>
+
+<h3>Check balance</h3>
+
+<div class="highlight"><pre><code class="language-c--" data-lang="c++">static int maxDepth(TreeNode* root){
+    if(root == 0) return 0;
+    return max(root-&gt;left,root-&gt;right)+1;
+}
+static int minDepth(TreeNode* root){
+    if(root == 0) return 0;
+    return min(root-&gt;left,root-&gt;right)+1;
+}
+static bool isBalanced(TreeNode* root){
+    return maxDepth(root) - min(Depth) &lt;= 1;
+}</code></pre></div>
+
+
+<h2>Graph</h2>
+
+<h3>Traversal algorithm</h3>
+
+<h4>Depth First</h4>
+
+<h4>Breadth First</h4>
+
+<h3>Find first comman ancestor in binary tree</h3>
+
+<p>(1) ask what first means, bottom to top or top to bottom ?
+(2) do each node have parent field ?
+(3) can i use additional buffer ? <br/>
+(4) does p and q guarenteed to appear in the tree ?</p>
+
+<ol>
+<li>if have parent field, trace up. Without the help of additional buffer, we may need O(2*n) time</li>
+<li>Find the first node the p &amp; q locate in the different side of him. Because we traversal the tree each time we need check current node, so some node may be touch many time !</li>
+</ol>
+
+
+<div class="highlight"><pre><code class="language-c--" data-lang="c++">bool isAncestor(TreeNode* root,TreeNode* dest) {
+    if(root == 0 || dest == 0)  return  false;
+    return isAncestor(root-&gt;left,dest) || isAncestor(root-&gt;right,dest) || root == dest;
+}
+TreeNode* findCommonAncestor(TreeNode* root,TreeNode* p,TreeNode* q){
+    if(isAncestor(root-&gt;left,p) || isAncestor(root-&gt;left,q))  
+        return findCommonAncestor(root-&gt;left,p,q);
+    else if(isAncestor(root-&gt;left,q) || isAncestor(root-&gt;right,p))    
+        return findCommonAncestor(root-&gt;right,p,q);
+    else
+        return root;
+}</code></pre></div>
+
+
+<ol>
+<li>We not only check wether p q is on left/right side, we also record how many node are matched in each side.</li>
+</ol>
+
+
+<div class="highlight"><pre><code class="language-c--" data-lang="c++">int cover(TreeNode* root,TreeNode* p,TreeNode* q) {
+    int res = 0;
+    if(root == 0) return res;
+    if(root == q || root === p)  ++res;
+    res += cover(root-&gt;left,p,q);
+    if(res == 2) return 2;//借助于０／１／２的剪枝
+    return res += cover(root-&gt;right,p,q);
+}
+TreeNode* findCommonAncestor(TreeNode* root,TreeNode* p,TreeNode* q) {
+    if(root==0||p==0||q==0) return 0;
+    if(root==p || root==q) return root;
+
+    int leftCover = cover(root-&gt;left,p,q);
+    if(leftCover == 2) {
+        return findCommonAncestor(root-&gt;left,p,q);
+    }
+
+    int rightCover = cover(root-&gt;right,p,q);
+    if(rightCover == 2) {
+        return findCommonAncestor(root-&gt;right,p,q);
+    }
+
+    if(leftCover==1 &amp;&amp; rightCover ==1) 
+        return root;
+    else
+        return 0;
+}</code></pre></div>
+
+
+<h3>Decide if tree2 is sub-tree of tree1</h3>
+
+<ol>
+<li><p>If we can use enough memory, we can record the pre-order and in-order of tree1 and tree2, check wether tree2 is always sub-string of tree1.We can check this using <strong>suffix tree</strong></p></li>
+<li><p>Visit certain node in tree1 and each node in tree2, if k is the number of occurences of tree2 root in tree1, the worst time can be characerized as O(n + k*m)</p></li>
+</ol>
+
+
+<div class="highlight"><pre><code class="language-c--" data-lang="c++">bool matchTree(TreeNode* tree1,TreeNode* tree2) {
+    if(tree1==0 &amp;&amp; tree2==0)    return true;
+    if(tree1==0 || tree2==0)    return false;
+    if(tree1-&gt;data != tree2-&gt;data)    return false;
+    return matchTree(tree1-&gt;left,tree2-&gt;left) &amp;&amp; matchTree(tree1-&gt;right,tree2-&gt;right);
+}
+bool containsTree(TreeNode* tree1,TreeNode* tree2) {
+    if(tree1 == 0)
+        return tree2 == 0;
+    if(tree2 == 0) 
+        return true;
+    if(tree1-&gt;data == tree2-&gt;data){
+        if(match(tree1,tree2))//may or may not be result
+            return true;
+    }
+    return containsTree(tree1-&gt;left,tree2) || containsTree(tree1-&gt;right,tree2);
+}</code></pre></div>
+
+
+<h3>Find patch in binary tree which adds up to particular value</h3>
+
+<div class="highlight"><pre><code class="language-c--" data-lang="c++"></code></pre></div>
+
+
+
+
+
+    <!--    3482-->
+    <div class="eof">-&nbsp;EOF&nbsp;-</div>
+    <p class="declare">声明:本文采用<a href="http://creativecommons.org/licenses/by-nc-sa/3.0/" target="_blank" rel="nofollow" title="署名-非商业性使用-相同方式共享">BY-NC-SA</a>协议进行授权.转载请注明: <a href="/algorithm/2015/05/08/Trees-Graphs.html" title="Trees and Graphs " rel="nofollow">Trees and Graphs</a></p>
+    <hr>
+	<!-- bdshare provider -->	
+	<style>
+		.bdsharebuttonbox{
+			float:right;
+		}
+	</style>
+	<div class="bdsharebuttonbox">
+		<a href="#" class="bds_tsina" data-cmd="tsina" title="分享到新浪微博"></a>
+		<a href="#" class="bds_tqq" data-cmd="tqq" title="分享到腾讯微博"></a>
+		<a href="#" class="bds_renren" data-cmd="renren" title="分享到人人网"></a>
+		<a href="#" class="bds_weixin" data-cmd="weixin" title="分享到微信"></a>
+		<a href="#" class="bds_more" data-cmd="more"></a>
+	</div>
+	<script>
+		window._bd_share_config={"common":{"bdSnsKey":{},"bdText":"","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"1","bdSize":"24"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];
+	</script>
+	<!--- end bdshare -->
+	<!--- 
+ -->
+	
+    <div class="pagination">
+      <ul>
+      
+        <li class="prev"><a href="/algorithm/2015/05/07/Stack-Queue.html" title="Stack and Queue">&larr; Previous</a></li>
+      
+        <li><a href="/archive.html">Archive</a></li>
+      
+        <li class="next"><a href="/algorithm/2015/05/11/Bit-Manip.html" title="Bit Manipulation">Next &rarr;</a></li>
+      
+      </ul>
+    </div>
+    <hr>
+    
+
+
+      <div id="disqus_thread"></div>
+    <script type="text/javascript">
+        /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
+        var disqus_shortname = 'carlsama'; // required: replace example with your forum shortname
+
+        /* * * DON'T EDIT BELOW THIS LINE * * */
+        (function() {
+            var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+            dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+        })();
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+    <a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+    
+
+
+
+
+
+  </div>
+  
+  <div class="span4">
+
+  
+    <h4>Tags</h4>
+    <ul class="tag_box">
+    
+    
+
+
+  
+     
+    	<li><a href="/tags.html#CareerCup-ref">CareerCup <span>7</span></a></li>
+    
+  
+
+
+
+    </ul>
+    
+  <h4>相关文章</h4>
+  <ul>
+  
+  <li><a href="/algorithm/2015/05/13/Hard.html ">Hard</a></li>
+  
+  <li><a href="/algorithm/2015/05/11/Bit-Manip.html ">Bit Manipulation</a></li>
+  
+  <li><a href="/algorithm/2015/05/07/Stack-Queue.html ">Stack and Queue</a></li>
+  
+  <li><a href="/c++/2015/05/05/No-virtual-in-const-dest.html ">探析C++中构造函数和析构函数中不能使用虚函数</a></li>
+  
+  <li><a href="/algorithm/2015/05/05/Linked-list.html ">Linked list</a></li>
+  
+  <li><a href="/algorithm/2015/05/01/Array-and-String.html ">Array and String</a></li>
+  
+  <li><a href="/interview/2015/04/30/Interview-Technical_Question.html ">Five step to a technical question</a></li>
+  
+  </ul>
+  </div>
+</div>
+<script type="text/javascript" src="/assets/themes/flying/js/blogscript.js"></script>
+
+
+      </div>
+
+      <footer>
+        <p>&copy;  2015 
+          with help from <a href="http://jekyllbootstrap.com" target="_blank" title="The Definitive Jekyll Blogging Framework">Jekyll Bootstrap</a>
+          and <a href="http://twitter.github.com/bootstrap/" target="_blank">Twitter Bootstrap</a>
+	<script type="text/javascript">var cnzz_protocol = (("https:" == document.location.protocol) ? " https://" : " http://");document.write(unescape("%3Cspan id='cnzz_stat_icon_1254782081'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "s4.cnzz.com/z_stat.php%3Fid%3D1254782081%26show%3Dpic' type='text/javascript'%3E%3C/script%3E"));</script>
+        </p>
+      </footer>
+
+    </div> <!-- /container -->
+
+    
+    
+  </body>
+
+<script type="text/javascript">
+$("a[href^='http://']").each(function(){
+	this.target="_blank";
+
+});
+</script>
+
+  <!--MathJax-->
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+      processEscapes: true
+       }
+  });
+</script>
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        TeX: {equationNumbers: {autoNumber: ["AMS"], useLabelIds: true},extensions: ["autobold.js"]},
+        "HTML-CSS": {linebreaks: {automatic: true}},
+        SVG: {linebreaks: {automatic: true}}
+    });
+</script>
+
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+    });
+</script>
+
+<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+<script type="text/javascript" src="/assets/themes/flying/js/default.js"></script>
+ </html>
+

@@ -1,0 +1,344 @@
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>C++ Primer -- Chap07 | Clint Wu's Blog</title>
+    <meta name="description" content="my reading notes about C++ Primer chap 7">
+    <meta name="author" content="">
+    <meta name="keywords" content="">
+
+    <!-- Le HTML5 shim, for IE6-8 support of HTML elements -->
+    <!--[if lt IE 9]>
+      <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+
+    <!-- Le styles -->
+    <link href="/assets/themes/flying/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/assets/themes/flying/css/style.css" rel="stylesheet" type="text/css" media="all">
+    <link href="/assets/themes/flying/css/syntax.css" rel="stylesheet" type="text/css" media="all">
+    <script type="text/javascript" src="/assets/themes/flying/js/jquery-1.9.1.min.js"></script>
+   <!-- Le fav and touch icons -->
+  <!-- Update these with your own images
+    <link rel="shortcut icon" href="images/favicon.ico">
+    <link rel="apple-touch-icon" href="images/apple-touch-icon.png">
+    <link rel="apple-touch-icon" sizes="72x72" href="images/apple-touch-icon-72x72.png">
+    <link rel="apple-touch-icon" sizes="114x114" href="images/apple-touch-icon-114x114.png">
+  -->
+</head>
+
+  <body>
+
+    <div class="navbar">
+      <div class="navbar-inner">
+        <div class="container">
+          <a class="brand" href="/">Clint Wu's Blog</a>
+          <ul class="nav">
+		<li><a href="/about.html">About</a></li>
+		<li><a href="/archive.html">Archive</a></li>
+		<li><a href="/categories.html">Categories</a></li>
+<!--		<li><a href="http://wiki.zhouyichu.com">Wiki</a></li>  -->
+		<li class="offset3"><a href="/atom.xml">Subscribe</a></li>
+		<li><a id="random" href="#">Random</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="container">
+
+      <div class="content">
+        
+<div class="page-header">
+  <h1>C++ Primer -- Chap07 <small class="H1_Date">--14 April 2015</small></h1>
+</div>
+
+<div class="row">
+  <div class="span8">
+    <h1>类</h1>
+
+<p>类的基本思想是data abstraction和encapsulation.</p>
+
+<blockquote><p>data abstraction是依赖于interface和implementation分离的编程技术
+encapsulation实现了interface和implementation的分离.</p></blockquote>
+
+<h2>封装</h2>
+
+<p>访问说明符(access spedifiers)</p>
+
+<blockquote><p>使用class和struct的唯一区别是默认的访问权限.
+一个类就是一个作用域:类外定义成员函数需要提供作用域.
+函数的返回类型位于函数名之前,需要时加上作用域指示符.</p></blockquote>
+
+<h2>函数</h2>
+
+<p>定义在类内部的函数是隐式的inline函数.</p>
+
+<h2>类的声明</h2>
+
+<p>类在声明之后,定义之前是一个不完全类型(incomplete type):可以定义其引用或指针,可以声明(非定义)以不完全类型为参数或返回值类型的函数.</p>
+
+<blockquote><p>因此,一旦类名出现后,就允许包含指向自身的引用或指针</p></blockquote>
+
+<h2>this</h2>
+
+<p>成员函数通过this指针来访问调用它的对象.当我们调用成员函数时,用请求该函数的对象地址初始化this.</p>
+
+<h3>const + this</h3>
+
+<p>默认情况下,this的类型是指向<strong>非常量版本类类型</strong>的<strong>常量指针</strong>.</p>
+
+<p>在const成员函数中,this是<strong>指向常量的常量指针</strong>,所以此时无法通过this指针来修改类成员,因此我们就不能调用普通成员函数.</p>
+
+<h2>类作用域和成员函数</h2>
+
+<p>编译器分两步来处理类:首先编译成员的声明,(此时类成员可见)然后是定义在类内部的成员函数体</p>
+
+<blockquote><p>用来定义类型的成员必须先定义后使用,与普通成员不同.
+inline函数和constexpr函数通常定义在头文件.</p></blockquote>
+
+<h3>类型名的特殊处理</h3>
+
+<p>在类中,如果成员使用了外层作用域中的某个名字,该名字代表某种类型,则类之后不能重定义这种类型.</p>
+
+<blockquote><p>类型名的定义通常出现在类的开始处.</p></blockquote>
+
+<h2>构造函数</h2>
+
+<p>构造函数不能声明为const的.当我们创建一个const对象时,直到构造函数完成初始化,对象才获得"常量"属性.</p>
+
+<p>1 default constructor(无参)</p>
+
+<p>2 synthesized default constructor(编译器合成)</p>
+
+<blockquote><p>如果存在<strong>类内初始值</strong>,用它初始化
+否则,默认初始化(与类型及位置有关)该成员,如果定义在块中的内置类型或复合类型对象被默认初始化,值未定义.</p></blockquote>
+
+<p>3 constructor initialize list(构造函数初始值列表)</p>
+
+<blockquote><p>当某个数据成员被列表忽略时,将以合成的默认构造函数方式隐式初始化(类内初始值或默认初始化)
+对于const,引用或为提供默认构造函数的类类型,必须对其初始化而非赋值</p></blockquote>
+
+<p>4 delegating constructor</p>
+
+<h3>隐式类类型转换</h3>
+
+<p>如果构造函数只接受一个实参,则它实际上定义了转换为此类的隐式转换机制.这种构造函数也称为转换构造函数(converting constructor).</p>
+
+<blockquote><p>只允许一步转换
+可以添加explicit来抑制隐式转换,只能直接初始化</p></blockquote>
+
+<p>构造函数执行过程:</p>
+
+<ol>
+<li>初始值列表</li>
+<li>默认初始化</li>
+<li>函数体</li>
+</ol>
+
+
+<h2>友元</h2>
+
+<p>友元关系不具有传递性.</p>
+
+<p>友元声明的作用是<strong>影响访问权限</strong>,本身并不是普通意义上的声明,类内其他函数要使用友元函数只能等到其正式声明.</p>
+
+<h2>聚合类(aggregate class)</h2>
+
+<h2>静态成员</h2>
+
+<h3>变量</h3>
+
+<p>不属于任一对象,所以不在构造函数中初始化.</p>
+
+<blockquote><p>类内部初始化静态成员: <strong>static constexpr</strong> int count = 0;(通常也应该在外部定义一下)
+类外部声明和定义</p></blockquote>
+
+<p>静态成员可以是不完全类型.</p>
+
+<blockquote><p>In class Bar
+static Bar mem; OK
+Bar* mem; OK
+Bar mem; NO</p></blockquote>
+
+<p>可以用静态成员做默认实参</p>
+
+<blockquote><p>void clear(char = bkground);</p></blockquote>
+
+<h3>函数</h3>
+
+<p>静态成员函数无this指针,因此:</p>
+
+<blockquote><p>不能声明为const.
+不能在其中使用this指针.</p></blockquote>
+
+<h2>访问控制</h2>
+
+<p>类内:
+    protected -> 子类\类内函数\frined类访问</p>
+
+<p>继承:
+    private属性不能被继承
+    private继承 -> protected和public在子类中变为private
+    public继承  -> protected和public在子类中保持
+    protected继承->protected和public在子类中变为protected</p>
+
+
+    <!--    1713-->
+    <div class="eof">-&nbsp;EOF&nbsp;-</div>
+    <p class="declare">声明:本文采用<a href="http://creativecommons.org/licenses/by-nc-sa/3.0/" target="_blank" rel="nofollow" title="署名-非商业性使用-相同方式共享">BY-NC-SA</a>协议进行授权.转载请注明: <a href="/c++/2015/04/14/C++-Primer-Chap07-Class.html" title="C++ Primer -- Chap07 " rel="nofollow">C++ Primer -- Chap07</a></p>
+    <hr>
+	<!-- bdshare provider -->	
+	<style>
+		.bdsharebuttonbox{
+			float:right;
+		}
+	</style>
+	<div class="bdsharebuttonbox">
+		<a href="#" class="bds_tsina" data-cmd="tsina" title="分享到新浪微博"></a>
+		<a href="#" class="bds_tqq" data-cmd="tqq" title="分享到腾讯微博"></a>
+		<a href="#" class="bds_renren" data-cmd="renren" title="分享到人人网"></a>
+		<a href="#" class="bds_weixin" data-cmd="weixin" title="分享到微信"></a>
+		<a href="#" class="bds_more" data-cmd="more"></a>
+	</div>
+	<script>
+		window._bd_share_config={"common":{"bdSnsKey":{},"bdText":"","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"1","bdSize":"24"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];
+	</script>
+	<!--- end bdshare -->
+	<!--- 
+ -->
+	
+    <div class="pagination">
+      <ul>
+      
+        <li class="prev"><a href="/c++/2015/04/14/C++-Primer-Chap06-Function.html" title="C++ Primer -- Chap06">&larr; Previous</a></li>
+      
+        <li><a href="/archive.html">Archive</a></li>
+      
+        <li class="next"><a href="/c++/2015/04/14/C++-Primer-Chap08-IO.html" title="C++ Primer -- Chap08">Next &rarr;</a></li>
+      
+      </ul>
+    </div>
+    <hr>
+    
+
+
+      <div id="disqus_thread"></div>
+    <script type="text/javascript">
+        /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
+        var disqus_shortname = 'carlsama'; // required: replace example with your forum shortname
+
+        /* * * DON'T EDIT BELOW THIS LINE * * */
+        (function() {
+            var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+            dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+        })();
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+    <a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+    
+
+
+
+
+
+  </div>
+  
+  <div class="span4">
+
+  
+    <h4>Tags</h4>
+    <ul class="tag_box">
+    
+    
+
+
+  
+     
+    	<li><a href="/tags.html#C++-ref">C++ <span>16</span></a></li>
+    
+  
+
+
+
+    </ul>
+    
+  <h4>相关文章</h4>
+  <ul>
+  
+  <li><a href="/algorithm/2015/05/13/Hard.html ">Hard</a></li>
+  
+  <li><a href="/algorithm/2015/05/11/Bit-Manip.html ">Bit Manipulation</a></li>
+  
+  <li><a href="/algorithm/2015/05/08/Trees-Graphs.html ">Trees and Graphs</a></li>
+  
+  <li><a href="/algorithm/2015/05/07/Stack-Queue.html ">Stack and Queue</a></li>
+  
+  <li><a href="/c++/2015/05/05/No-virtual-in-const-dest.html ">探析C++中构造函数和析构函数中不能使用虚函数</a></li>
+  
+  <li><a href="/algorithm/2015/05/05/Linked-list.html ">Linked list</a></li>
+  
+  <li><a href="/algorithm/2015/05/01/Array-and-String.html ">Array and String</a></li>
+  
+  </ul>
+  </div>
+</div>
+<script type="text/javascript" src="/assets/themes/flying/js/blogscript.js"></script>
+
+
+      </div>
+
+      <footer>
+        <p>&copy;  2015 
+          with help from <a href="http://jekyllbootstrap.com" target="_blank" title="The Definitive Jekyll Blogging Framework">Jekyll Bootstrap</a>
+          and <a href="http://twitter.github.com/bootstrap/" target="_blank">Twitter Bootstrap</a>
+	<script type="text/javascript">var cnzz_protocol = (("https:" == document.location.protocol) ? " https://" : " http://");document.write(unescape("%3Cspan id='cnzz_stat_icon_1254782081'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "s4.cnzz.com/z_stat.php%3Fid%3D1254782081%26show%3Dpic' type='text/javascript'%3E%3C/script%3E"));</script>
+        </p>
+      </footer>
+
+    </div> <!-- /container -->
+
+    
+    
+  </body>
+
+<script type="text/javascript">
+$("a[href^='http://']").each(function(){
+	this.target="_blank";
+
+});
+</script>
+
+  <!--MathJax-->
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+      processEscapes: true
+       }
+  });
+</script>
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        TeX: {equationNumbers: {autoNumber: ["AMS"], useLabelIds: true},extensions: ["autobold.js"]},
+        "HTML-CSS": {linebreaks: {automatic: true}},
+        SVG: {linebreaks: {automatic: true}}
+    });
+</script>
+
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+    });
+</script>
+
+<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+<script type="text/javascript" src="/assets/themes/flying/js/default.js"></script>
+ </html>
+
