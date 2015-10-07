@@ -5,7 +5,7 @@
     <meta charset="utf-8">
     <title>探析C++中构造函数和析构函数中不能使用虚函数 | Clint Wu's Blog</title>
     <meta name="description" content="探析C++中构造函数和析构函数中不能使用虚函数">
-    <meta name="author" content="">
+    <meta name="author" content="Clint Wu">
     <meta name="keywords" content="">
 
     <!-- Le HTML5 shim, for IE6-8 support of HTML elements -->
@@ -63,31 +63,31 @@
 
 <p>我们通过一个样例来看一下不遵守规则所带来的错误．</p>
 
-<div class="highlight"><pre><code class="language-c--" data-lang="c++">class Base {
-    public:
-        Base() {    test();}
-        ~Base() {   test();}
-        virtual void test() { cout&lt;&lt;&quot;Base&quot;&lt;&lt;endl; }
-};
-class Derived : public Base {
-     public:
-        Derived() {     test();}
-        ~Derived() {    test(); }
-        void test() {   cout&lt;&lt;&quot;Derived&quot;&lt;&lt;endl;}
-};
-int main(){
-        Derived tmp;
-}</code></pre></div>
+<div class="highlight"><pre><code class="language-c--" data-lang="c++"><span class="k">class</span> <span class="nc">Base</span> <span class="p">{</span>
+    <span class="k">public</span><span class="o">:</span>
+        <span class="n">Base</span><span class="p">()</span> <span class="p">{</span>   <span class="n">test</span><span class="p">();}</span>
+        <span class="o">~</span><span class="n">Base</span><span class="p">()</span> <span class="p">{</span>   <span class="n">test</span><span class="p">();}</span>
+        <span class="k">virtual</span> <span class="kt">void</span> <span class="n">test</span><span class="p">()</span> <span class="p">{</span> <span class="n">cout</span><span class="o">&lt;&lt;</span><span class="s">&quot;Base&quot;</span><span class="o">&lt;&lt;</span><span class="n">endl</span><span class="p">;</span> <span class="p">}</span>
+<span class="p">};</span>
+<span class="k">class</span> <span class="nc">Derived</span> <span class="o">:</span> <span class="k">public</span> <span class="n">Base</span> <span class="p">{</span>
+     <span class="k">public</span><span class="o">:</span>
+        <span class="n">Derived</span><span class="p">()</span> <span class="p">{</span>        <span class="n">test</span><span class="p">();}</span>
+        <span class="o">~</span><span class="n">Derived</span><span class="p">()</span> <span class="p">{</span>    <span class="n">test</span><span class="p">();</span> <span class="p">}</span>
+        <span class="kt">void</span> <span class="n">test</span><span class="p">()</span> <span class="p">{</span>  <span class="n">cout</span><span class="o">&lt;&lt;</span><span class="s">&quot;Derived&quot;</span><span class="o">&lt;&lt;</span><span class="n">endl</span><span class="p">;}</span>
+<span class="p">};</span>
+<span class="kt">int</span> <span class="nf">main</span><span class="p">(){</span>
+        <span class="n">Derived</span> <span class="n">tmp</span><span class="p">;</span>
+<span class="p">}</span></code></pre></div>
 
 
 <p>在样例中我们构造并析构了Derived对象，我们原本希望对virtual method test的调用都会时Derived版的，但是实际的输出为</p>
 
-<div class="highlight"><pre><code class="language-c--" data-lang="c++">clint@clint-Laptop:~$ g++ main.cpp 
-clint@clint-Laptop:~$ ./a.out 
-    Base
-    Derived
-    Derived
-    Base</code></pre></div>
+<div class="highlight"><pre><code class="language-c--" data-lang="c++"><span class="n">clint</span><span class="err">@</span><span class="n">clint</span><span class="o">-</span><span class="nl">Laptop</span><span class="p">:</span><span class="o">~</span><span class="err">$</span> <span class="n">g</span><span class="o">++</span> <span class="n">main</span><span class="p">.</span><span class="n">cpp</span> 
+<span class="n">clint</span><span class="err">@</span><span class="n">clint</span><span class="o">-</span><span class="nl">Laptop</span><span class="p">:</span><span class="o">~</span><span class="err">$</span> <span class="p">.</span><span class="o">/</span><span class="n">a</span><span class="p">.</span><span class="n">out</span> 
+    <span class="n">Base</span>
+    <span class="n">Derived</span>
+    <span class="n">Derived</span>
+    <span class="n">Base</span></code></pre></div>
 
 
 <h2>分析</h2>
@@ -97,7 +97,7 @@ clint@clint-Laptop:~$ ./a.out
 <p>在析构Derived对象时，Derived subobject先被析构，当析构到Base subobject时，只有Base subobject的virutal method test存在，所以依然只能调用Base subobject的virtual method test</p>
 
 
-    <!--    1045-->
+    <!--    1046-->
     <div class="eof">-&nbsp;EOF&nbsp;-</div>
     <p class="declare">声明:本文采用<a href="http://creativecommons.org/licenses/by-nc-sa/3.0/" target="_blank" rel="nofollow" title="署名-非商业性使用-相同方式共享">BY-NC-SA</a>协议进行授权.转载请注明: <a href="/c++/2015/05/05/No-virtual-in-const-dest.html" title="探析C++中构造函数和析构函数中不能使用虚函数 " rel="nofollow">探析C++中构造函数和析构函数中不能使用虚函数</a></p>
     <hr>
@@ -136,22 +136,21 @@ clint@clint-Laptop:~$ ./a.out
     
 
 
-  <!-- 多说评论框 start -->
-	<div class="ds-thread" data-thread-key="ID" data-title="Title" data-url="Url"></div>
-<!-- 多说评论框 end -->
-<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
-<script type="text/javascript">
-var duoshuoQuery = {short_name:"carlsamagithub"};
-	(function() {
-		var ds = document.createElement('script');
-		ds.type = 'text/javascript';ds.async = true;
-		ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
-		ds.charset = 'UTF-8';
-		(document.getElementsByTagName('head')[0] 
-		 || document.getElementsByTagName('body')[0]).appendChild(ds);
-	})();
-	</script>
-<!-- 多说公共JS代码 end -->
+      <div id="disqus_thread"></div>
+    <script type="text/javascript">
+        /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
+        var disqus_shortname = 'carlsamagithubio'; // required: replace example with your forum shortname
+
+        /* * * DON'T EDIT BELOW THIS LINE * * */
+        (function() {
+            var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+            dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+        })();
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+    <a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+    
 
 
 
@@ -181,6 +180,8 @@ var duoshuoQuery = {short_name:"carlsamagithub"};
   <h4>相关文章</h4>
   <ul>
   
+  <li><a href="/network%20programming/2015/10/06/basic-network-function-listen.html ">Some basic functions in Network Programming</a></li>
+  
   <li><a href="/algorithm/2015/05/13/Hard.html ">Hard</a></li>
   
   <li><a href="/algorithm/2015/05/11/Bit-Manip.html ">Bit Manipulation</a></li>
@@ -193,8 +194,6 @@ var duoshuoQuery = {short_name:"carlsamagithub"};
   
   <li><a href="/algorithm/2015/05/01/Array-and-String.html ">Array and String</a></li>
   
-  <li><a href="/interview/2015/04/30/Interview-Technical_Question.html ">Five step to a technical question</a></li>
-  
   </ul>
   </div>
 </div>
@@ -204,10 +203,10 @@ var duoshuoQuery = {short_name:"carlsamagithub"};
       </div>
 
       <footer>
-        <p>&copy;  2015 
+        <p>&copy; Clint Wu 2015 
           with help from <a href="http://jekyllbootstrap.com" target="_blank" title="The Definitive Jekyll Blogging Framework">Jekyll Bootstrap</a>
           and <a href="http://twitter.github.com/bootstrap/" target="_blank">Twitter Bootstrap</a>
-	<script type="text/javascript">var cnzz_protocol = (("https:" == document.location.protocol) ? " https://" : " http://");document.write(unescape("%3Cspan id='cnzz_stat_icon_1254782081'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "s4.cnzz.com/z_stat.php%3Fid%3D1254782081%26show%3Dpic' type='text/javascript'%3E%3C/script%3E"));</script>
+	<script type="text/javascript">var cnzz_protocol = (("https:" == document.location.protocol) ? " https://" : " http://");document.write(unescape("%3Cspan id='cnzz_stat_icon_1000067280'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "s22.cnzz.com/z_stat.php%3Fid%3D1000067280%26show%3Dpic' type='text/javascript'%3E%3C/script%3E"));</script>
         </p>
       </footer>
 

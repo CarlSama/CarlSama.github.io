@@ -5,7 +5,7 @@ permalink: /:categories/:year/:month/:day/:title.html
 exclude: [".rvmrc", ".rbenv-version", "README.md", "Rakefile", "changelog.md"]
 #auto: true
 watch: true
-highlighter: 
+pygments: true
 #markdown: redcarpet
 markdown: rdiscount
 #markdown: kramdown
@@ -18,12 +18,12 @@ rdiscount:
 # Themes are encouraged to use these universal variables 
 # so be sure to set them if your theme uses them.
 #
-title   : Clint Wu's Blog
-tagline : I've seen things you people wouldn't believe. Attack ships on fire off the shoulder of Orion. I watched c-beams ... glitter in the dark near Tanhauser Gate. All those ... moments will be lost ... in time, like tears ... in rain. Time ... to die.
-author  : Clint Wu
-name    : Clint Wu 
-email   : calciversama@gmail.com
-github  : CarlSama 
+title : Clint Wu's Blog
+tagline: I've seen things you people wouldn't believe. Attack ships on fire off the shoulder of Orion.I watched c-beams ... glitter in the dark near Tanhauser Gate. All those ... moments will be lost ... in time, like tears ... in rain. Time ... to die.
+author :
+  name : Clint Wu
+  email : calciversama@gmail.com
+  github : CarlSama 
 
 # The production_url is only used when full-domain names are needed
 # such as sitemap.txt 
@@ -85,20 +85,20 @@ JB :
   # Set 'provider' to false to turn commenting off globally.
   #
   comments :
-    provider : duoshuo 
+    provider : disqus
     disqus :
-      short_name : carlsama
+      short_name : carlsamagithubio
     duoshuo :
-       short_name : carlsama
-  #  livefyre :
-  #    site_id : 123
-  # intensedebate :
-  #    account : 123abc
-  #  facebook :
-  #    appid : 123
-  #    num_posts: 5
-  #    width: 580
-  #    colorscheme: light
+      short_name : carlsamagithubio
+    livefyre :
+      site_id : 123
+    intensedebate :
+      account : 123abc
+    facebook :
+      appid : 123
+      num_posts: 5
+      width: 580
+      colorscheme: light
    
   # Settings for analytics helper
   # Set 'provider' to the analytics provider you want to use.
@@ -107,7 +107,7 @@ JB :
   analytics :
     provider : google 
     google : 
-        tracking_id : 'UA-68490058-1'
+        tracking_id : 'UA-47490993-1'
 #    getclicky :
 #      site_id : 
 #    mixpanel :
@@ -118,8 +118,8 @@ JB :
   # Set 'provider' to the sharing provider you want to use.
   # Set 'provider' to false to turn sharing off globally.
   #
-  sharing :
-    provider : bdshare
+  #sharing :
+  #provider : bdshare
     
   # Settings for all other include helpers can be defined by creating 
   # a hash with key named for the given helper. ex:
